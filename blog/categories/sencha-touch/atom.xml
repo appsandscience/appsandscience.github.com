@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Sencha Touch | My Octopress Blog]]></title>
+  <link href="http://appsandscience.github.com/blog/categories/sencha-touch/atom.xml" rel="self"/>
+  <link href="http://appsandscience.github.com/"/>
+  <updated>2012-07-07T13:50:18-05:00</updated>
+  <id>http://appsandscience.github.com/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[The Structure of a Sencha Touch Controller]]></title>
+    <link href="http://appsandscience.github.com/blog/2012/04/16/the-structure-of-a-sencha-touch-controller-2/"/>
+    <updated>2012-04-16T02:00:33-05:00</updated>
+    <id>http://appsandscience.github.com/blog/2012/04/16/the-structure-of-a-sencha-touch-controller-2</id>
+    <content type="html"><![CDATA[<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/02/CityBars1.png"><img src="http://www.appsandscience.com/wp-content/uploads/2012/02/CityBars1-207x300.png" alt="caption id=&quot;attachment_80&quot; align=&quot;alignnone&quot; width=&quot;207&quot; caption=&quot;The CityBars Sencha Touch Application&quot;" /></a></p>
+
+<p>In the past three blog posts, I used the CityBars Sencha Touch application, to</p>
+
+<ol>
+<li><p><a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">to define a few terms used in Sencha Touch development</a>,</p></li>
+<li><p><a href="http://www.appsandscience.com/the-structure-of-a-sencha-touch-application/">to explain the structure of a Sencha Touch application</a>, and</p></li>
+<li><p><a href="http://www.appsandscience.com/how-to-write-code-for-the-views-in-sencha-touch/">to demonstrate how the code for the graphical user interface is generated.</a></p></li>
+</ol>
+
+
+<p>In this post I will describe how the application</p>
+
+<ol>
+<li><p>finds the user's location,</p></li>
+<li><p>searches Yelp for bars near the user, and</p></li>
+<li><p>responds when the user taps on a with the bar that the user is interested in.</p></li>
+</ol>
+
+
+<p>All this logic is contained in a <em>controller</em> JavaScript file, under the controller subdirectory. The rest of this blog post will explain the various parts of the code in the controller file.</p>
+
+<h3>How References and Controls work in the Controllers of Sencha Touch</h3>
+
+<p>To be able to read the values of some interface elements, and to set or manipulate them, the controller needs a reference to them. Each reference within the controller is defined as a pair. For instance the list of bars in the ListContainer, has an id of <em>#datalist</em> (see <a href="http://www.appsandscience.com/how-to-write-code-for-the-views-in-sencha-touch/">my previous blog post</a> for a description of the views of the application.) This list of bars is referred to by the controller as dataList. The exact syntax is shown below:</p>
+
+<pre><code>Ext.define('CityBars.controller.Business', {
+    extend: 'Ext.app.Controller',
+
+    config: {
+        refs: {
+            dataList: '#dataList',
+            listCard: '#listCard',
+            mainNav: 'mainnav',
+            detailCard: '#detailCard'
+        },
+
+        control: {
+            "#dataList": {
+                itemtap: 'onListItemTap'
+            }
+        }
+    },
+</code></pre>
+
+<p>In the code snippet above, the first line is used to define the controller's name (Business) and to declare it as a controller, as opposed to a view, for instance. The config part of the code has two parts. The <em>refs</em> part that I referred to above and the control part, that I will explain in a bit. Notice the four of references.</p>
+
+<ol>
+<li><p>The first assigns the name <strong>dataList</strong> to the list component with id <strong>#datalist</strong> (note the # character).</p></li>
+<li><p>The second assigns the name <strong>listCard</strong> to the list card for each bar, a card that has the id <strong>#listCard</strong> in the ListContainer.js file.</p></li>
+<li><p>The third assings the name <strong>mainNav</strong> to the navigation panel <strong>mainav</strong> which is the navigation panel in the <em>MainNav.js</em>. Because the controller refers to the navigation view as a whole, no # is used before the name <strong>mainnav</strong>.</p></li>
+<li><p>Similarly, the element with id <strong>#detailCard</strong> gets a reference <strong>detailCard</strong> in the controller.</p></li>
+</ol>
+
+
+<p>The controller can now refer to the four elements above and get their values or properties with function that Sencha Touch has implemented. These functions are called getters. For the <strong>datalist</strong> reference though, the application would like to respond when the user taps on it. For that reason a control needs to be defined. More specifically, the event that the controller is waiting for is <strong>itemtap</strong>. As soon as this event occurs, the function <strong>onListItemTap</strong> is executed. That function has to be defined by the user later on in the controller.</p>
+
+<p>Now that the references and the controllers are set, the logic of the application has to be specified. But before any logic is introduced to respond to the tapping of an item, the application has to be able to find the user's location and to find nearby bars.</p>
+
+<h3>How Sencha Touch finds the user's location</h3>
+
+<p>Sencha Touch contains a few utilities that access the information that a phone can supply. In the case of geolocation, Sencha Touch uses <em>Ext.util.Geolocation</em>. The function to get the user's location is called <strong>getLocation</strong> in this application, and it is shown below:</p>
+
+<pre><code>getLocation: function(callback) {
+    if (navigator &amp;&amp; navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            callback(position);
+        }, function(error) {
+            alert('You are not connected to the Internet');
+        });
+    }
+</code></pre>
+
+<p>The function above checks whether the user is connected to the internet, and if yes, it returns the user's latitude and longitude.</p>
+
+<h3>How Sencha Touch finds businesses near the user</h3>
+
+<p>With the user's location known, the application connects to Yelp and pulls that information. In order for this to happen however, the application needs to know the type of information that is going to be returned by Yelp, as well as the names of the fields that are returned. The information about the type of connection with Yelp is encapsulated in a Sencha Touch <strong>Store</strong> and the fields in a Sencha Touch <strong>Model</strong>. Models and stores go together, but let's start with the store.</p>
+
+<h4>The structure of a Sencha Touch Store</h4>
+
+<p>The information about a store is kept in a file under the <em>store</em> directory. The contents of that file are shown below:</p>
+
+<pre><code>Ext.define('CityBars.store.BusinessStore', {
+    extend: 'Ext.data.Store',
+    requires: [
+        'CityBars.model.Business'
+    ],
+
+    config: {
+        model: 'CityBars.model.Business',
+        storeId: 'BusinessStore',
+        proxy: {
+            type: 'jsonp',
+            reader: {
+                type: 'json',
+                rootProperty: 'businesses'
+            }
+        }
+    }
+});
+</code></pre>
+
+<p>First, the store is given a name <em>BusinessStore</em> and declared as a store. Because the store always corresponds to a model, this is declared with the requires statement. The store is configured with the model that it is related to, an id is given to it for easy referencing, and information about the connection is displayed in the reader statement. Because the information is pulled from an external website (Yelp,) the type of the store is <strong>jsonp</strong>. Because the information is returned from Yelp as a JSON file, the reader of the file is of <strong>json</strong> type, and only everything under the <strong>businesses</strong> property is read.</p>
+
+<h4>The structure of a Sencha Touch Model</h4>
+
+<p>The information about a model is kept in a JavaScript file under the <em>model</em> directory. The contents of the file are shown below:</p>
+
+<pre><code>Ext.define('CityBars.model.Business', {
+    extend: 'Ext.data.Model',
+    config: {
+        fields: [
+            {
+                name: 'id',
+                type: 'int'
+            },
+            {
+                name: 'name'
+            },
+            {
+                name: 'latitude'
+            },
+            {
+                name: 'longitude'
+            },
+            {
+                name: 'address1'
+            },
+            {
+                name: 'address2'
+            },
+            {
+                name: 'address3'
+            },
+            {
+                name: 'phone'
+            },
+            {
+                name: 'state_code'
+            },
+            {
+                name: 'mobile_url'
+            },
+            {
+                name: 'rating_img_url_small'
+            },
+            {
+                name: 'photo_url'
+            }
+        ]
+    }
+});
+</code></pre>
+
+<p>This model is given a name, <em>Business</em>, and it is declared as a model. Then the fields served by the JSON file are described. They are id, name, latitude, longitude, etc. Those fields can be found on Yelp's website.</p>
+
+<h4>The init function in a Sencha Touch Controller</h4>
+
+<p>Now that the model and the store for the application have been defined, the controller, can perform a search and serve the information to the user. This is done with the following code:</p>
+
+<pre><code>init: function() {
+    this.getLocation(function (location) {
+        this.getBusinesses(location, function (store) {
+            this.getDataList().setStore(store);
+        });
+    });
+},
+</code></pre>
+
+<p>In the few lines of code above, a lot of logic for the application is contained. First, the function that is defined in the above lines is run when the controller is initialized, and that is as soon as the application launches. Each line after the first starts with <strong>this</strong>, a shortcut to the current controller. In other words, when the controller initializes, the <strong>getLocation</strong> function contained in the same file is run, then the <strong>getLocation</strong> function is run and finally the store for the <strong>dataList</strong> defined above is set to the store that was also defined above. With the sequence of these steps, the initial list of the application is populated with entries, and the controller is ready to respond to the user's taps.</p>
+
+<h3>How a Sencha Touch Controller responds to a user's tap</h3>
+
+<p>The function executed when a list item is tapped is shown below:</p>
+
+<pre><code>onListItemTap: function(dataview, index, target, record, e, options) {
+    if (record) {
+
+        if (!this.details) {
+            this.details = Ext.create('CityBars.view.DetailPanel', {
+                title: 'Details'
+            });
+        }
+
+        var map = this.details.child('#detailMap');
+        map.setMapOptions({
+            zoom: 17
+        });
+        map.setMapCenter({
+            latitude: record.get('latitude'),
+            longitude: record.get('longitude')
+        });
+
+        var info = this.details.child('#contact').child('#info');
+        info.child('#photo').setData(record.data);
+        info.child('#data').setData(record.data);
+
+        this.getMainNav().push(this.details);
+    }
+}
+</code></pre>
+
+<p>The function is only run if a record exists. If a record exists and the details panel does not, a new panel is created with the title 'Details'. A child of the details panel is a map of the business, with id <em>detailMap</em>. Defining the map of the business as a variable, map, allows us to easily refer to it in subsequent commands. These commands set the zoom level, and set the center of the map to the latitude and longitude of the business. Defining the container of the Detail Panel that contains the info about the business, allows us to easily refer to it in subsequent commands. These commands set the data for the photo, and the data. As soon as the assignments are made, the main navigation brings the details view in the foreground from the right side of the screen. This is called a push transition.</p>
+
+<h3>Conclusion</h3>
+
+<p>And here you have it. This is how the controller works in sync with the application's model, store and views to run the application.</p>
+
+<p>This concludes the four-part series that described the structure and the logic of a Sencha Touch application. I hope that this as well as my previous three posts will help you understand the explanations given in this <a href="http://vimeo.com/36420727">screencast</a>, where the CityBars application was originally developed using Sencha's <a href="http://www.sencha.com/products/designer/">Designer software</a>. The source code for the application is available <a href="http://img1.sencha.com/files/misc/citybars.xda.zip">here</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Write Code for the Views in Sencha Touch]]></title>
+    <link href="http://appsandscience.github.com/blog/2012/03/12/how-to-write-code-for-the-views-in-sencha-touch/"/>
+    <updated>2012-03-12T02:00:00-05:00</updated>
+    <id>http://appsandscience.github.com/blog/2012/03/12/how-to-write-code-for-the-views-in-sencha-touch</id>
+    <content type="html"><![CDATA[<p>In the past few blog posts, I described</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Structure of a Sencha Touch Application]]></title>
+    <link href="http://appsandscience.github.com/blog/2012/03/05/the-structure-of-a-sencha-touch-application/"/>
+    <updated>2012-03-05T02:00:00-06:00</updated>
+    <id>http://appsandscience.github.com/blog/2012/03/05/the-structure-of-a-sencha-touch-application</id>
+    <content type="html"><![CDATA[<p>In previous posts, I described the <a href="http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/">advantages of using Sencha Touch</a> for developing mobile applications, and I introduced <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">a few terms used in Sencha Touch</a>. In this post I will continue describing Sencha Touch by explaining the code in a simple application that finds the bars near the user. (I first describe CityBars in a <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">previous blog post</a>.</p>
+
+<p>The emphasis of this post will be on describing how code should be organized in Sencha Touch applications, and on analyzing the code of two important files that each Sencha Touch application must have.</p>
+
+<h3>The MVCS architecture and file structure</h3>
+
+<p>Sencha Touch applications follow the [Model-View-Controller](https://en.wikipedia.org/wiki/Model</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Making Sense of Sencha Touch: The CityBars App - Views]]></title>
+    <link href="http://appsandscience.github.com/blog/2012/02/20/making-sense-of-sencha-touch-the-citybars-app-views/"/>
+    <updated>2012-02-20T02:00:00-06:00</updated>
+    <id>http://appsandscience.github.com/blog/2012/02/20/making-sense-of-sencha-touch-the-citybars-app-views</id>
+    <content type="html"><![CDATA[<p>In a previous <a href="http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/">post</a>, I described the advantages of using Sencha Touch to develop applications for mobile platforms. In this post I would like to describe a few Sencha Touch concepts.</p>
+
+<p>If you would like to see how a Sencha Touch application works, check out the <a href="http://dev.sencha.com/deploy/touch/examples/kitchensink/">kitchensink</a> application that has been created by the developers of Sencha Touch. You will be able to preview the JavaScript code that generates these views and you will be surprised by the relative short length of the code, at least compared to that necessary in Objective-C.</p>
+
+<p>Some additional digging around might show you that it's not very easy to program in Sencha Touch. Although Sencha Touch is easier to pick up compared to Objective-C, especially for web developers, the platform is not very straightforward. Mostly because of the complicated terminology used in Sencha Touch, and the dearth of books on the subject: the <a href="http://www.amazon.com/gp/product/1849515441/ref=as_li_ss_tl?ie=UTF8&amp;tag=appsandscienc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1849515441">Sencha Touch Cookbook</a> is the only currently published book on Sencha Touch and it covers version 1.1, and not the current version 2.</p>
+
+<p>This will be the first in a series of blog posts that aim to describe how to develop, build and deploy a mobile application using Touch 2. After you read this and the upcoming posts you will be able to</p>
+
+<ul>
+<li><p>understand several concepts of Sencha Touch,</p></li>
+<li><p>follow along with <a href="http://vimeo.com/36420727">this</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Creating an iPhone application with JavaScript: The Sencha Touch solution]]></title>
+    <link href="http://appsandscience.github.com/blog/2012/02/13/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/"/>
+    <updated>2012-02-13T02:00:00-06:00</updated>
+    <id>http://appsandscience.github.com/blog/2012/02/13/creating-an-iphone-application-with-javascript-the-sencha-touch-solution</id>
+    <content type="html"><![CDATA[<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/02/sencha.png"><img src="http://www.appsandscience.com/wp-content/uploads/2012/02/sencha.png" alt="caption id=&quot;attachment_72&quot; align=&quot;alignright&quot; width=&quot;147&quot; caption=&quot;Sencha Touch&quot;" /></a>[/caption]</p>
+
+<p>During the past few months, I spent countless hours studying Objective-C, the language used for iPhone and iPad app development. Just to give you an idea, the books and tutorials I have studied from include</p>
+
+<ol>
+<li><p><a href="http://www.amazon.com/gp/product/1430236027/ref=as_li_ss_tl?ie=UTF8&amp;tag=appsandscienc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1430236027">iPhone and iPad Apps for Absolute Beginners, iOS 5 Edition</a> by Rory Lewis,</p></li>
+<li><p><a href="http://www.amazon.com/gp/product/0321773772/ref=as_li_ss_tl?ie=UTF8&amp;tag=appsandscienc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321773772">iOS Programming: The Big Nerd Ranch Guide (2nd Edition)</a>, by Aaron Hillegass,</p></li>
+<li><p><a href="http://www.amazon.com/gp/product/0321706285/ref=as_li_ss_tl?ie=UTF8&amp;tag=appsandscienc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0321706285">Objective-C Programming: The Big Nerd Ranch Guide</a>, by Aaron Hillegass,</p></li>
+<li><p><a href="http://itunes.apple.com/itunes-u/ipad-iphone-application-development/id473757255">iPad and iPhone Application Development</a>, by Paul Hegarty, and</p></li>
+<li><p><a href="http://www.video2brain.com/en/products-193.htm">Video2Brain: Getting Started with iOS 5</a>, by Robert Turrall.</p></li>
+</ol>
+
+
+<p>All these books and tutorials taught me a lot about Objective-C but mostly that it is a very hard language to learn. In addition, Objective-C is only useful for developing iPhone/iPad applications. But how could I develop applications that can run on Android devices? Would I need to reprogram my apps in Java, the language used by Android? I was hoping that I could find a platform that could convert a single program into apps that can run on multiple operating systems (Apple, Android, even Blackberry) and multiple devices (smartphones, tablets, or the web). I was astonished to find out that many such languages exists (see the Wikipedia page on <a href="http://en.wikipedia.org/wiki/Mobile_development#Platform_development_environment">Mobile Development</a> for an exhaustive list.)</p>
+
+<p>Now my problem became which platform to choose. I experimented with several of them.</p>
+
+<ul>
+<li><p>First, I worked with <a href="http://www.canappi.com/">Canappi</a>. (See my <a href="http://www.appsandscience.com/creating-an-iphone-application-without-coding-the-tiggzi-solution/">blog post</a> for a detailed description.) Canappi uses a specialized language (MDSL) that can be used to generate Objective-C code. Unfortunately, the code that Canappi generates has includes deprecated statements, probably as a result of Canappi being the product of a single developer.</p></li>
+<li><p>Then, I looked at <a href="http://www.canappi.com/">Tiggzi</a>. (See my <a href="http://www.appsandscience.com/creating-an-iphone-application-without-coding-the-tiggzi-solution/">blog post</a> for a detailed description.) Tiggzi uses a GUI that helps you create iPhone and Android applications without any coding. Tiggzi is a useful tool, but it's not free and open-source.</p></li>
+<li><p>I also looked at <a href="http://www.anscamobile.com/corona/">Corona SDK</a>, a platform that uses the scripting language Lua. Corona SDK is commonly used to develop 2D games, with several iPhone games on the app store, but not for business, data-driven applications.</p></li>
+<li><p>I finally looked at ways of creating apps using HTML5 and its associated technologies, JavaScript and Cascading Style Sheets (CSS). Although I briefly looked at Dreamweaver, I was turned off by its price. It was at that point that I looked into <a href="http://www.sencha.com/blog/sencha-touch-2-raising-the-bar/">Sencha Touch</a>.</p></li>
+</ul>
+
+
+<p>Sencha Touch is a JavaScript library built for the development of web applications that look native on mobile devices. After I read some of its <a href="http://docs.sencha.com/touch/2-0/">documentation</a> and reviewed the <a href="http://dev.sencha.com/deploy/touch/examples/kitchensink/">kitchensink</a> application developed with Sencha Touch, I decided to spend some time to learn the platform. There are several advantages to Sencha Touch.</p>
+
+<p>Sencha Touch</p>
+
+<ol>
+<li><p>Is free and fast (especially its latest version.)</p></li>
+<li><p>Simplifies the creation of nested views and the insertion of images on table entries.</p></li>
+<li><p>Works with Phonegap but it also allows native packaging.</p></li>
+<li><p>Uses the MVC (model-view-controller) architecture for code organization and reusability.</p></li>
+<li><p>Aims to support Windows phones in the future.</p></li>
+</ol>
+
+
+<p>Unfortunately, Sencha Touch, has a steep learning curve, like Objective-C, but unlike Objective-C, there are not that many books that describe its use, apart from the very useful <a href="http://www.amazon.com/gp/product/1849515441/ref=as_li_ss_tl?ie=UTF8&amp;tag=appsandscienc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1849515441">Sencha Touch Cookbook</a>, by Ajit Kumar.</p>
+
+<p>I hope to slowly learn the platform in order to be able to quickly and robustly develop data driven applications. Future blog post will describe my progress in using Sencha Touch.</p>
+]]></content>
+  </entry>
+  
+</feed>
