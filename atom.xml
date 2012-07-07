@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[Apps and Science]]></title>
   <link href="http://appsandscience.github.com/atom.xml" rel="self"/>
   <link href="http://appsandscience.github.com/"/>
-  <updated>2012-07-07T13:50:18-05:00</updated>
+  <updated>2012-07-07T14:04:34-05:00</updated>
   <id>http://appsandscience.github.com/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Nikos Bentenitis]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Structure of a Sencha Touch Controller]]></title>
-    <link href="http://appsandscience.github.com/blog/2012/04/16/the-structure-of-a-sencha-touch-controller-2/"/>
+    <link href="http://appsandscience.github.com/blog/the-structure-of-a-sencha-touch-controller-2/"/>
     <updated>2012-04-16T02:00:33-05:00</updated>
-    <id>http://appsandscience.github.com/blog/2012/04/16/the-structure-of-a-sencha-touch-controller-2</id>
+    <id>http://appsandscience.github.com/blog/the-structure-of-a-sencha-touch-controller-2</id>
     <content type="html"><![CDATA[<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/02/CityBars1.png"><img src="http://www.appsandscience.com/wp-content/uploads/2012/02/CityBars1-207x300.png" alt="caption id=&quot;attachment_80&quot; align=&quot;alignnone&quot; width=&quot;207&quot; caption=&quot;The CityBars Sencha Touch Application&quot;" /></a></p>
 
 <p>In the past three blog posts, I used the CityBars Sencha Touch application, to</p>
@@ -233,18 +233,18 @@
   
   <entry>
     <title type="html"><![CDATA[How to Write Code for the Views in Sencha Touch]]></title>
-    <link href="http://appsandscience.github.com/blog/2012/03/12/how-to-write-code-for-the-views-in-sencha-touch/"/>
+    <link href="http://appsandscience.github.com/blog/how-to-write-code-for-the-views-in-sencha-touch/"/>
     <updated>2012-03-12T02:00:00-05:00</updated>
-    <id>http://appsandscience.github.com/blog/2012/03/12/how-to-write-code-for-the-views-in-sencha-touch</id>
+    <id>http://appsandscience.github.com/blog/how-to-write-code-for-the-views-in-sencha-touch</id>
     <content type="html"><![CDATA[<p>In the past few blog posts, I described</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[The Structure of a Sencha Touch Application]]></title>
-    <link href="http://appsandscience.github.com/blog/2012/03/05/the-structure-of-a-sencha-touch-application/"/>
+    <link href="http://appsandscience.github.com/blog/the-structure-of-a-sencha-touch-application/"/>
     <updated>2012-03-05T02:00:00-06:00</updated>
-    <id>http://appsandscience.github.com/blog/2012/03/05/the-structure-of-a-sencha-touch-application</id>
+    <id>http://appsandscience.github.com/blog/the-structure-of-a-sencha-touch-application</id>
     <content type="html"><![CDATA[<p>In previous posts, I described the <a href="http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/">advantages of using Sencha Touch</a> for developing mobile applications, and I introduced <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">a few terms used in Sencha Touch</a>. In this post I will continue describing Sencha Touch by explaining the code in a simple application that finds the bars near the user. (I first describe CityBars in a <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">previous blog post</a>.</p>
 
 <p>The emphasis of this post will be on describing how code should be organized in Sencha Touch applications, and on analyzing the code of two important files that each Sencha Touch application must have.</p>
@@ -257,9 +257,9 @@
   
   <entry>
     <title type="html"><![CDATA[Making Sense of Sencha Touch: The CityBars App - Views]]></title>
-    <link href="http://appsandscience.github.com/blog/2012/02/20/making-sense-of-sencha-touch-the-citybars-app-views/"/>
+    <link href="http://appsandscience.github.com/blog/making-sense-of-sencha-touch-the-citybars-app-views/"/>
     <updated>2012-02-20T02:00:00-06:00</updated>
-    <id>http://appsandscience.github.com/blog/2012/02/20/making-sense-of-sencha-touch-the-citybars-app-views</id>
+    <id>http://appsandscience.github.com/blog/making-sense-of-sencha-touch-the-citybars-app-views</id>
     <content type="html"><![CDATA[<p>In a previous <a href="http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/">post</a>, I described the advantages of using Sencha Touch to develop applications for mobile platforms. In this post I would like to describe a few Sencha Touch concepts.</p>
 
 <p>If you would like to see how a Sencha Touch application works, check out the <a href="http://dev.sencha.com/deploy/touch/examples/kitchensink/">kitchensink</a> application that has been created by the developers of Sencha Touch. You will be able to preview the JavaScript code that generates these views and you will be surprised by the relative short length of the code, at least compared to that necessary in Objective-C.</p>
@@ -278,9 +278,9 @@
   
   <entry>
     <title type="html"><![CDATA[Creating an iPhone application with JavaScript: The Sencha Touch solution]]></title>
-    <link href="http://appsandscience.github.com/blog/2012/02/13/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/"/>
+    <link href="http://appsandscience.github.com/blog/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/"/>
     <updated>2012-02-13T02:00:00-06:00</updated>
-    <id>http://appsandscience.github.com/blog/2012/02/13/creating-an-iphone-application-with-javascript-the-sencha-touch-solution</id>
+    <id>http://appsandscience.github.com/blog/creating-an-iphone-application-with-javascript-the-sencha-touch-solution</id>
     <content type="html"><![CDATA[<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/02/sencha.png"><img src="http://www.appsandscience.com/wp-content/uploads/2012/02/sencha.png" alt="caption id=&quot;attachment_72&quot; align=&quot;alignright&quot; width=&quot;147&quot; caption=&quot;Sencha Touch&quot;" /></a>[/caption]</p>
 
 <p>During the past few months, I spent countless hours studying Objective-C, the language used for iPhone and iPad app development. Just to give you an idea, the books and tutorials I have studied from include</p>
@@ -327,9 +327,9 @@
   
   <entry>
     <title type="html"><![CDATA[Creating an iPhone application without coding: The Tiggzi solution]]></title>
-    <link href="http://appsandscience.github.com/blog/2012/02/06/creating-an-iphone-application-without-coding-the-tiggzi-solution/"/>
+    <link href="http://appsandscience.github.com/blog/creating-an-iphone-application-without-coding-the-tiggzi-solution/"/>
     <updated>2012-02-06T02:00:00-06:00</updated>
-    <id>http://appsandscience.github.com/blog/2012/02/06/creating-an-iphone-application-without-coding-the-tiggzi-solution</id>
+    <id>http://appsandscience.github.com/blog/creating-an-iphone-application-without-coding-the-tiggzi-solution</id>
     <content type="html"><![CDATA[<p>For the past few weeks I have been experimenting with various tools that one can use to develop an iPhone/iPad application, without the need to program in Objective-C. In a previous blog post <a href="http://www.appsandscience.com/getting-started-on-app-development-with-a-little-help-from-canappi/">I described Canappi</a>, a tool that uses a specialized language, MDSL, to generate Objective-C code. In this post, I will describe <a href="http://www.tiggzi.com">Tiggzi</a>, a web service that creates native code for iPhone and Android applications using a coding-free graphical user interface. I will first describe the advantages and disadvantages of Tiggzi, and I will then share with you my recommendation about the service.</p>
 
 <h3>Advantages</h3>
@@ -363,9 +363,9 @@
   
   <entry>
     <title type="html"><![CDATA[Getting Started on App Development with a Little Help from Canappi]]></title>
-    <link href="http://appsandscience.github.com/blog/2012/01/23/getting-started-on-app-development-with-a-little-help-from-canappi/"/>
+    <link href="http://appsandscience.github.com/blog/getting-started-on-app-development-with-a-little-help-from-canappi/"/>
     <updated>2012-01-23T02:00:00-06:00</updated>
-    <id>http://appsandscience.github.com/blog/2012/01/23/getting-started-on-app-development-with-a-little-help-from-canappi</id>
+    <id>http://appsandscience.github.com/blog/getting-started-on-app-development-with-a-little-help-from-canappi</id>
     <content type="html"><![CDATA[<p><strong>Developing simple data-driven apps for the iPhone is not simple</strong>. Objective-C, the native language of the iPhone, is not easy, and accomplishing simple tasks with can be quite complicated.</p>
 
 <p>I realized that when I tried to create a simple menu-driven application that catalogs all the Chemistry apps on the Apple store.</p>
@@ -387,9 +387,9 @@
   
   <entry>
     <title type="html"><![CDATA[Five Reasons Why You See More and More People with iPhones]]></title>
-    <link href="http://appsandscience.github.com/blog/2012/01/16/five-reasons-why-you-see-more-and-more-people-with-iphones/"/>
+    <link href="http://appsandscience.github.com/blog/five-reasons-why-you-see-more-and-more-people-with-iphones/"/>
     <updated>2012-01-16T09:58:00-06:00</updated>
-    <id>http://appsandscience.github.com/blog/2012/01/16/five-reasons-why-you-see-more-and-more-people-with-iphones</id>
+    <id>http://appsandscience.github.com/blog/five-reasons-why-you-see-more-and-more-people-with-iphones</id>
     <content type="html"><![CDATA[<p>Do you see more and more people carrying iPhones these days? I certainly do: Everywhere I look, I see iPhones, new and old. So what do you think?</p>
 
 <p><strong>Are there more and more people using iPhones these days?</strong></p>
@@ -427,9 +427,9 @@
   
   <entry>
     <title type="html"><![CDATA[Getting started with developing iOS apps: Hardware]]></title>
-    <link href="http://appsandscience.github.com/blog/2012/01/07/getting-started-with-developing-ios-apps-hardware/"/>
+    <link href="http://appsandscience.github.com/blog/getting-started-with-developing-ios-apps-hardware/"/>
     <updated>2012-01-07T16:26:00-06:00</updated>
-    <id>http://appsandscience.github.com/blog/2012/01/07/getting-started-with-developing-ios-apps-hardware</id>
+    <id>http://appsandscience.github.com/blog/getting-started-with-developing-ios-apps-hardware</id>
     <content type="html"><![CDATA[<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/01/iphone.jpg"><img src="http://www.appsandscience.com/wp-content/uploads/2012/01/iphone-300x225.jpg" alt="caption id=&quot;attachment_23&quot; align=&quot;alignleft&quot; width=&quot;180&quot; caption=&quot;Image: Salvatore Vuono / FreeDigitalPhotos.net&quot;" /></a>[/caption]</p>
 
 <p>The first question that I had when I started with iPhone/iPad app development was what hardware was necessary for the job. Could I develop my apps on Windows or, even better, could I do it using my Linux machine? And would I need to buy an iPad in addition to the iPhone that I already owned?</p>
@@ -493,9 +493,9 @@
   
   <entry>
     <title type="html"><![CDATA[Welcome to the Apps and Science Blog!]]></title>
-    <link href="http://appsandscience.github.com/blog/2012/01/07/welcome-to-apps-and-science-blog/"/>
+    <link href="http://appsandscience.github.com/blog/welcome-to-apps-and-science-blog/"/>
     <updated>2012-01-07T02:00:00-06:00</updated>
-    <id>http://appsandscience.github.com/blog/2012/01/07/welcome-to-apps-and-science-blog</id>
+    <id>http://appsandscience.github.com/blog/welcome-to-apps-and-science-blog</id>
     <content type="html"><![CDATA[<p>Welcome to the Apps and Science blog! <strong>This blog will document my progress towards learning how to create a science app</strong> for the iPhone and the iPad.</p>
 
 <p><strong>I am a chemist with some knowledge of programming</strong> but with a great interest in creating science apps. Thinking that &#8220;it can&#8217;t be that hard to create an app,&#8221; I got started reading about app development in December, 2011. <strong>I hope to develop my own science app by June, 2012</strong>.</p>
