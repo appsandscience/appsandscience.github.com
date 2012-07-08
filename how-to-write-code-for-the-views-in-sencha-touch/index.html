@@ -1,0 +1,500 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>How to Write Code for the Views in Sencha Touch - Apps and Science</title>
+  <meta name="author" content="Nikos Bentenitis">
+
+  
+  <meta name="description" content="In the past few blog posts, I described few basic terms used in Sencha Touch and explained the code in designer.html and designer.js from the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://appsandscience.github.com/how-to-write-code-for-the-views-in-sencha-touch/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Apps and Science" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Apps and Science</a></h1>
+  
+    <h2>Apps for iPhone, iPad, Android, and Web</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:appsandscience.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">How to Write Code for the Views in Sencha Touch</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-12T02:00:00-05:00" pubdate data-updated="true">Mar 12<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In the past few blog posts, I described <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">few basic terms</a> used in Sencha Touch and <a href="http://www.appsandscience.com/the-structure-of-a-sencha-touch-application/">explained the code in designer.html and designer.js</a> from the CityBars application, that I have <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">described before</a>. In this post, I will briefly explain the code in the three Views of the application and in a future post, I will describe the remaining components of the application.</p>
+
+<p>The first view to describe is <strong>MainNav</strong>, the code of which is stored under <strong>app/view/MainNav.js</strong>, according to the MVCS guidelines provided by Sencha. (See my <a href="http://www.appsandscience.com/the-structure-of-a-sencha-touch-application/">previous post</a> for details on the MVCS model.) The code of <strong>MainNav.js</strong> is reproduced below:</p>
+
+<pre><code>Ext.define('CityBars.view.MainNav', { extend: 'Ext.NavigationView',
+requires: [ 'CityBars.view.ListContainer' ],
+
+config: {
+    ui: 'light',
+    navigationBar: {
+        ui: 'light'
+    },
+    items: [
+        {
+            xtype: 'listcontainer',
+            title: 'CityBars',
+            id: 'listCard'
+        }
+    ]
+}
+});
+</code></pre>
+
+<p>Let’s analyze it step-by-step. The first few lines of the code</p>
+
+<pre><code>Ext.define('CityBars.view.MainNav', { extend: 'Ext.NavigationView',
+requires: [ 'CityBars.view.ListContainer' ],
+</code></pre>
+
+<p>specify that the view is part of the CityBars application, that the view is called <strong>MainNav</strong> and that its code is stored under the <strong>view</strong> subdirectory of the <strong>app</strong> directory. The <strong>MainNav</strong> View is a <strong>NavigationView</strong>, a standard component of the Sencha Touch framework. For <strong>MainNav</strong> to work, another view, called <strong>ListContainer</strong>, also stored under the <strong>view</strong> subdirectory, is necessary. (I will describe the <strong>ListContainer</strong> view in a little bit.) The rest of the code describes the components that <strong>MainNav</strong> consists of. As I mentioned before, <strong>MainNav</strong> is a special case of a standard Sencha-Touch component called <strong>NavigationView</strong>. The generic <strong>NavigationView</strong> has to be specialized for this applications, and that is achieved with the following code:</p>
+
+<pre><code>config: {
+    ui: 'light',
+    navigationBar: {
+        ui: 'light'
+    },
+    items: [
+        {
+            xtype: 'listcontainer',
+            title: 'CityBars',
+            id: 'listCard'
+        }
+    ]
+}
+</code></pre>
+
+<p>According to the code above, the theme of the <strong>NavigationView</strong> is <em>light</em>, which means that colors have lighter shades, and also that the navigation bar at the top of the <strong>NavigationView</strong> is colored lightly. The view has one component, a <strong>Container</strong> with a list, and a nickname (xtype) of <em>listcontainer</em>. The title of the <em>listcontainer</em> is ‘CityBars’ and its identification string is <em>listCard</em>. The identification string (id) is added so that the <strong>Controller</strong>, the “mind,” of the application, can refer to it easily. (Although for this application, the controller does not use this information.)</p>
+
+<p>The <em>listcontainer</em> that was first introduced above has to be defined. The code for the component is stored under <strong>app/view/ListContainer.js</strong> and that file contains the following code:</p>
+
+<pre><code>Ext.define('CityBars.view.ListContainer', { extend: 'Ext.Container',
+config: {
+    layout: {
+        type: 'fit'
+    },
+    items: [
+        {
+            xtype: 'list',
+            id: 'dataList',
+            itemTpl: [
+                '&lt;img class="photo" src="{photo_url}" width="40" height="40"/&gt;{name}&lt;br/&gt;&lt;img src="{rating_img_url_small}"/&gt;&amp;nbsp;&lt;small&gt;{address1}&lt;/small&gt;'
+            ]
+        }
+    ]
+}
+}); 
+</code></pre>
+
+<p>The first two lines of the code</p>
+
+<pre><code>Ext.define('CityBars.view.ListContainer', { extend: 'Ext.Container',
+</code></pre>
+
+<p>specify that the view is part of the CityBars application, that it is called <strong>ListContainer</strong> and that its code is stored under the <strong>view</strong> subdirectory. The <strong>ListContainer</strong> View is a <strong>Container</strong>, a standard component of the Sencha Touch framework. As before, the generic <strong>Container</strong> needs to be configured with the components of our interest, in this case a list. This is achieved with the <em>config</em> statement:</p>
+
+<pre><code>    layout: {
+        type: 'fit'
+    },
+    items: [
+        {
+            xtype: 'list',
+            id: 'dataList',
+            itemTpl: [
+                '&lt;img class="photo" src="{photo_url}" width="40" height="40"/&gt;{name}&lt;br/&gt;&lt;img src="{rating_img_url_small}"/&gt;&amp;nbsp;&lt;small&gt;{address1}&lt;/small&gt;'
+            ]
+        }
+    ]
+</code></pre>
+
+<p>The <em>config</em> statement specifies that layout of the <strong>Container</strong> is <em>fit</em>, which means that every component takes the whole width of the device that the application is running on. The only item in the <strong>ListContainer</strong> is a list, with the standard Sencha-Touch type <strong>list</strong> and the identification string of <em>datalist</em>. Every item in the list is rendered according to the html template shown in <em>itemTpl</em>. According to that template, a 40×40 photo, the name of the bar, its rating and its address are displayed in that order.</p>
+
+<p>When a user taps on one of the items of the list, the application displays additional information about the item tapped. Although, at this point, I have not explained how the program will perform that logic (“if a user taps on an item, show a panel with details about the bar”,) let’s assume that the application does that somehow. (I will explain how this is done in a future post). Once the panel with details appears, a View called <strong>DetailPanel</strong> is displayed. The code for that view is shown below:</p>
+
+<pre><code>Ext.define('CityBars.view.DetailPanel', {
+extend: 'Ext.tab.Panel',
+
+config: {
+    tabBar: {
+        docked: 'top',
+        ui: 'dark',
+        layout: {
+            pack: 'center',
+            type: 'hbox'
+        }
+    },
+    items: [
+        {
+            xtype: 'container',
+            id: 'contact',
+            title: 'Contact',
+            iconCls: 'info',
+            items: [
+                {
+                    xtype: 'container',
+                    id: 'info',
+                    padding: 10,
+                    layout: {
+                        type: 'hbox'
+                    },
+                    items: [
+                        {
+                            xtype: 'component',
+                            height: 100,
+                            id: 'photo',
+                            tpl: [
+                                '&lt;img class="photo" src="{photo_url}" width="100" height="100"/&gt;'
+                            ],
+                            width: 100
+                        },
+                        {
+                            xtype: 'component',
+                            id: 'data',
+                            padding: 10,
+                            tpl: [
+                                '&lt;h2&gt;{name}&lt;/h2&gt;',
+                                '           &lt;div class="info"&gt;',
+                                '           {address1}&lt;br/&gt;',
+                                '           &lt;img src="{rating_img_url_small}"/&gt;',
+                                '           &lt;/div&gt;'
+                            ]
+                        }
+                    ]
+                },
+                {
+                    xtype: 'container',
+                    layout: {
+                        pack: 'center',
+                        type: 'hbox'
+                    },
+                    items: [
+                        {
+                            xtype: 'button',
+                            width: 100,
+                            text: 'Call'
+                        },
+                        {
+                            xtype: 'spacer',
+                            width: 57
+                        },
+                        {
+                            xtype: 'button',
+                            width: 100,
+                            text: 'More'
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            xtype: 'map',
+            id: 'detailMap',
+            title: 'Map',
+            iconCls: 'info'
+        }
+    ]
+}
+
+});
+</code></pre>
+
+<p>To understand the code shown above, refer to an example detail view, shown on the figures below.</p>
+
+<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/03/CityBars2-207x300.png">!</a></p>
+
+<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/03/CityBars2.png">!</a></p>
+
+<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/03/CityBars3-207x300.png">!</a></p>
+
+<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/03/CityBars3.png">!</a></p>
+
+<p>The detail view contains a tab panel with two tabs: The first tab consists of two Container components: The first Container shows an image of the bar, its name, its address, and its rating. The second Container is stacked below the first, and contains two buttons: one that can be used to call the bar and one to that can be tapped to get more information about the bar. Both buttons are inactive in this version of the application.</p>
+
+<p>The second tab panel consists of a Map component that displays the location of the bar on a Google map.</p>
+
+<p>As a result of this arrangement, a tab panel has to be defined using the following code:</p>
+
+<p> Ext.define(&#8216;CityBars.view.DetailPanel&#8217;, {     extend: &#8216;Ext.tab.Panel&#8217;,</p>
+
+<p>which describes, as before, that the code for this panel is stored under <strong>app/view/DetailPanel.js</strong>, and that the panel is a special case of a Sencha-Touch component called <strong>tab.Panel</strong>. The configuration of the tab panel is achieved using the following code:</p>
+
+<pre><code>config: {
+     tabBar: {
+        docked: 'top',
+        ui: 'dark',         
+        layout: {
+            pack: 'center',
+            type: 'hbox'
+            }
+        }, 
+</code></pre>
+
+<p>According to the code above, the tab bar is docked at the top of the screen, it has a <em>dark</em> theme and lays out its tabs horizontally (hbox) and centered at the center of the tab panel.</p>
+
+<p>The first tab called ‘Contact’ is the most complicated and it is set up in the following code:</p>
+
+<pre><code>xtype: 'container',
+id: 'contact',
+title: 'Contact',
+iconCls: 'info',
+items: [{
+        xtype: 'container',
+        id: 'info',
+        padding: 10,
+            layout: {
+                type: 'hbox'
+                },
+        items: [{
+                xtype: 'component',
+                height: 100,
+                id: 'photo',
+                tpl: ['&lt;img class="photo" src="{photo_url}" width="100" height="100"/&gt;',                     width: 100
+                },
+                {
+                xtype: 'component',
+                id: 'data',
+                padding: 10,
+                tpl: [  '&lt;h2&gt;{name}&lt;/h2&gt;',
+                        '&lt;div class="info"',
+                        '{address1}&lt;br/&gt;',
+                        '&lt;img src="{rating_img_url_small}"/&gt;',
+                        '&lt;/div&gt;'
+                        ]
+                }]},
+            {
+            xtype: 'container',
+            layout: {
+                pack: 'center',
+                type: 'hbox'
+                },
+            items: [{
+                    xtype: 'button',
+                    width: 100,
+                    text: 'Call'
+                },
+                {
+                    xtype: 'spacer',
+                    width: 57
+                },
+                {
+                    xtype: 'button',
+                    width: 100,
+                    text: 'More'
+                }]
+            }
+            ]}, 
+</code></pre>
+
+<p>The first tab is a Sencha-Touch <strong>Container</strong>, with identification <em>contact</em>, title <em>Contact</em>, and has an info icon associated with it (Because this tab panel is docked at the top of the container, the icon is not visible; the icon would be visible if the tab panel were docked at the bottom of the view). This tab contains two <strong>Containers</strong>, as mentioned above. One is the <em>info</em> container that arranges its items horizontally (hbox). The items in it are a 100×100 photo with identification <em>photo</em>, and an html string (with id <em>data</em>) that contains the name, the address and the rating of the bar. The second <strong>Container</strong> centers its three items horizontally; its items are a button with the text <em>Call</em>, a spacer, and a second button with the text <em>More</em>.</p>
+
+<p>The second tab, described with the code below, is a map type with identification <em>detailMap</em>, with title ‘Map’ and an <em>info</em> icon. (As before, because the tab panel is docked at the top of the view, the icon is not visible.). The code below</p>
+
+<pre><code>xtype: 'map',
+id: 'detailMap',
+title: 'Map',
+iconCls: 'info' 
+</code></pre>
+
+<p>describes that when the ‘Map’ tab is tapped, a Google map of the bar is shown.</p>
+
+<p>But how the application knows to perform such an action?</p>
+
+<p>The mechanism for this action, as well as that for the action resulting from the user tapping on a list item will be described in a following post that will focus on the application’s <strong>Controller</strong>, as well as on the way by which the application retrieves its data.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Nikos Bentenitis</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-12T02:00:00-05:00" pubdate data-updated="true">Mar 12<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/sencha-touch/'>Sencha Touch</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://appsandscience.github.com/how-to-write-code-for-the-views-in-sencha-touch/" data-via="" data-counturl="http://appsandscience.github.com/how-to-write-code-for-the-views-in-sencha-touch/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/the-structure-of-a-sencha-touch-application/" title="Previous Post: The Structure of a Sencha Touch Application">&laquo; The Structure of a Sencha Touch Application</a>
+      
+      
+        <a class="basic-alignment right" href="/the-structure-of-a-sencha-touch-controller-2/" title="Next Post: The Structure of a Sencha Touch Controller">The Structure of a Sencha Touch Controller &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/the-structure-of-a-sencha-touch-controller-2/">The Structure of a Sencha Touch Controller</a>
+      </li>
+    
+      <li class="post">
+        <a href="/how-to-write-code-for-the-views-in-sencha-touch/">How to Write Code for the Views in Sencha Touch</a>
+      </li>
+    
+      <li class="post">
+        <a href="/the-structure-of-a-sencha-touch-application/">The Structure of a Sencha Touch Application</a>
+      </li>
+    
+      <li class="post">
+        <a href="/making-sense-of-sencha-touch-the-citybars-app-views/">Making Sense of Sencha Touch: The CityBars App - Views</a>
+      </li>
+    
+      <li class="post">
+        <a href="/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/">Creating an iPhone application with JavaScript: The Sencha Touch solution</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Nikos Bentenitis -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,69 +1,65 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://appsandscience.github.com/blog/welcome-to-apps-and-science-blog/</loc>
-        <lastmod>2012-07-07T13:50:10-05:00</lastmod>
+        <loc>http://appsandscience.github.com/welcome-to-apps-and-science-blog/</loc>
+        <lastmod>2012-07-07T19:22:57-05:00</lastmod>
     </url>
     <url>
         <loc>
-            http://appsandscience.github.com/blog/getting-started-with-developing-ios-apps-hardware/
+            http://appsandscience.github.com/getting-started-with-developing-ios-apps-hardware/
         </loc>
         <lastmod>2012-07-07T13:50:10-05:00</lastmod>
     </url>
     <url>
         <loc>
-            http://appsandscience.github.com/blog/five-reasons-why-you-see-more-and-more-people-with-iphones/
+            http://appsandscience.github.com/five-reasons-why-you-see-more-and-more-people-with-iphones/
+        </loc>
+        <lastmod>2012-07-07T19:21:57-05:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://appsandscience.github.com/getting-started-on-app-development-with-a-little-help-from-canappi/
+        </loc>
+        <lastmod>2012-07-07T19:19:20-05:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://appsandscience.github.com/creating-an-iphone-application-without-coding-the-tiggzi-solution/
         </loc>
         <lastmod>2012-07-07T13:50:10-05:00</lastmod>
     </url>
     <url>
         <loc>
-            http://appsandscience.github.com/blog/getting-started-on-app-development-with-a-little-help-from-canappi/
+            http://appsandscience.github.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/
+        </loc>
+        <lastmod>2012-07-07T19:47:39-05:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://appsandscience.github.com/making-sense-of-sencha-touch-the-citybars-app-views/
         </loc>
         <lastmod>2012-07-07T13:50:10-05:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://appsandscience.github.com/blog/creating-an-iphone-application-without-coding-the-tiggzi-solution/
-        </loc>
-        <lastmod>2012-07-07T13:50:10-05:00</lastmod>
+        <loc>http://appsandscience.github.com/the-structure-of-a-sencha-touch-application/</loc>
+        <lastmod>2012-07-07T19:04:09-05:00</lastmod>
     </url>
     <url>
         <loc>
-            http://appsandscience.github.com/blog/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/
+            http://appsandscience.github.com/how-to-write-code-for-the-views-in-sencha-touch/
         </loc>
-        <lastmod>2012-07-07T13:50:10-05:00</lastmod>
+        <lastmod>2012-07-07T18:53:22-05:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://appsandscience.github.com/blog/making-sense-of-sencha-touch-the-citybars-app-views/
-        </loc>
-        <lastmod>2012-07-07T13:50:10-05:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://appsandscience.github.com/blog/the-structure-of-a-sencha-touch-application/
-        </loc>
-        <lastmod>2012-07-07T13:50:10-05:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://appsandscience.github.com/blog/how-to-write-code-for-the-views-in-sencha-touch/
-        </loc>
-        <lastmod>2012-07-07T13:50:10-05:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://appsandscience.github.com/blog/the-structure-of-a-sencha-touch-controller-2/
-        </loc>
-        <lastmod>2012-07-07T13:50:10-05:00</lastmod>
+        <loc>http://appsandscience.github.com/the-structure-of-a-sencha-touch-controller-2/</loc>
+        <lastmod>2012-07-07T19:26:01-05:00</lastmod>
     </url>
     <url>
         <loc>http://appsandscience.github.com/blog/archives/</loc>
-        <lastmod>2012-07-07T13:50:10-05:00</lastmod>
+        <lastmod>2012-07-07T19:47:39-05:00</lastmod>
     </url>
     <url>
         <loc>http://appsandscience.github.com/</loc>
-        <lastmod>2012-07-07T13:50:10-05:00</lastmod>
+        <lastmod>2012-07-07T19:47:39-05:00</lastmod>
     </url>
 </urlset>

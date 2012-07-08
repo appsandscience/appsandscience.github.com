@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Making Sense of Sencha Touch: The CityBars App - Views - Apps and Science</title>
+  <meta name="author" content="Nikos Bentenitis">
+
+  
+  <meta name="description" content="In a previous post, I described the advantages of using Sencha Touch to develop applications for mobile platforms. In this post I would like to &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://appsandscience.github.com/making-sense-of-sencha-touch-the-citybars-app-views/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Apps and Science" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Apps and Science</a></h1>
+  
+    <h2>Apps for iPhone, iPad, Android, and Web</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:appsandscience.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Making Sense of Sencha Touch: The CityBars App - Views</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T02:00:00-06:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In a previous <a href="http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/">post</a>, I described the advantages of using Sencha Touch to develop applications for mobile platforms. In this post I would like to describe a few Sencha Touch concepts.</p>
+
+<p>If you would like to see how a Sencha Touch application works, check out the <a href="http://dev.sencha.com/deploy/touch/examples/kitchensink/">kitchensink</a> application that has been created by the developers of Sencha Touch. You will be able to preview the JavaScript code that generates these views and you will be surprised by the relative short length of the code, at least compared to that necessary in Objective-C.</p>
+
+<p>Some additional digging around might show you that it&#8217;s not very easy to program in Sencha Touch. Although Sencha Touch is easier to pick up compared to Objective-C, especially for web developers, the platform is not very straightforward. Mostly because of the complicated terminology used in Sencha Touch, and the dearth of books on the subject: the <a href="http://www.amazon.com/gp/product/1849515441/ref=as_li_ss_tl?ie=UTF8&amp;tag=appsandscienc-20&amp;linkCode=as2&amp;camp=1789&amp;creative=390957&amp;creativeASIN=1849515441">Sencha Touch Cookbook</a> is the only currently published book on Sencha Touch and it covers version 1.1, and not the current version 2.</p>
+
+<p>This will be the first in a series of blog posts that aim to describe how to develop, build and deploy a mobile application using Touch 2. After you read this and the upcoming posts you will be able to</p>
+
+<ul>
+<li><p>understand several concepts of Sencha Touch,</p></li>
+<li><p>follow along with <a href="http://vimeo.com/36420727">this</a></p></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Nikos Bentenitis</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T02:00:00-06:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/sencha-touch/'>Sencha Touch</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://appsandscience.github.com/making-sense-of-sencha-touch-the-citybars-app-views/" data-via="" data-counturl="http://appsandscience.github.com/making-sense-of-sencha-touch-the-citybars-app-views/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/" title="Previous Post: Creating an iPhone application with JavaScript: The Sencha Touch solution">&laquo; Creating an iPhone application with JavaScript: The Sencha Touch solution</a>
+      
+      
+        <a class="basic-alignment right" href="/the-structure-of-a-sencha-touch-application/" title="Next Post: The Structure of a Sencha Touch Application">The Structure of a Sencha Touch Application &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/the-structure-of-a-sencha-touch-controller-2/">The Structure of a Sencha Touch Controller</a>
+      </li>
+    
+      <li class="post">
+        <a href="/how-to-write-code-for-the-views-in-sencha-touch/">How to Write Code for the Views in Sencha Touch</a>
+      </li>
+    
+      <li class="post">
+        <a href="/the-structure-of-a-sencha-touch-application/">The Structure of a Sencha Touch Application</a>
+      </li>
+    
+      <li class="post">
+        <a href="/making-sense-of-sencha-touch-the-citybars-app-views/">Making Sense of Sencha Touch: The CityBars App - Views</a>
+      </li>
+    
+      <li class="post">
+        <a href="/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/">Creating an iPhone application with JavaScript: The Sencha Touch solution</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Nikos Bentenitis -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
