@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Sencha Touch | Apps and Science]]></title>
-  <link href="http://appsandscience.github.com/blog/categories/sencha-touch/atom.xml" rel="self"/>
-  <link href="http://appsandscience.github.com/"/>
-  <updated>2012-07-07T20:17:18-05:00</updated>
-  <id>http://appsandscience.github.com/</id>
+  <link href="http://www.appsandscience.com/blog/categories/sencha-touch/atom.xml" rel="self"/>
+  <link href="http://www.appsandscience.com/"/>
+  <updated>2012-07-14T10:21:40-05:00</updated>
+  <id>http://www.appsandscience.com/</id>
   <author>
     <name><![CDATA[Nikos Bentenitis]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Structure of a Sencha Touch Controller]]></title>
-    <link href="http://appsandscience.github.com/the-structure-of-a-sencha-touch-controller-2/"/>
+    <link href="http://www.appsandscience.com/the-structure-of-a-sencha-touch-controller-2/"/>
     <updated>2012-04-16T02:00:33-05:00</updated>
-    <id>http://appsandscience.github.com/the-structure-of-a-sencha-touch-controller-2</id>
+    <id>http://www.appsandscience.com/the-structure-of-a-sencha-touch-controller-2</id>
     <content type="html"><![CDATA[<p>In the past three blog posts, I used the CityBars Sencha Touch application, to</p>
 
 <ol>
@@ -231,9 +231,9 @@ config: {
   
   <entry>
     <title type="html"><![CDATA[How to Write Code for the Views in Sencha Touch]]></title>
-    <link href="http://appsandscience.github.com/how-to-write-code-for-the-views-in-sencha-touch/"/>
+    <link href="http://www.appsandscience.com/how-to-write-code-for-the-views-in-sencha-touch/"/>
     <updated>2012-03-12T02:00:00-05:00</updated>
-    <id>http://appsandscience.github.com/how-to-write-code-for-the-views-in-sencha-touch</id>
+    <id>http://www.appsandscience.com/how-to-write-code-for-the-views-in-sencha-touch</id>
     <content type="html"><![CDATA[<p>In the past few blog posts, I described <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">few basic terms</a> used in Sencha Touch and <a href="http://www.appsandscience.com/the-structure-of-a-sencha-touch-application/">explained the code in designer.html and designer.js</a> from the CityBars application, that I have <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">described before</a>. In this post, I will briefly explain the code in the three Views of the application and in a future post, I will describe the remaining components of the application.</p>
 
 <p>The first view to describe is <strong>MainNav</strong>, the code of which is stored under <strong>app/view/MainNav.js</strong>, according to the MVCS guidelines provided by Sencha. (See my <a href="http://www.appsandscience.com/the-structure-of-a-sencha-touch-application/">previous post</a> for details on the MVCS model.) The code of <strong>MainNav.js</strong> is reproduced below:</p>
@@ -521,9 +521,9 @@ iconCls: 'info'
   
   <entry>
     <title type="html"><![CDATA[The Structure of a Sencha Touch Application]]></title>
-    <link href="http://appsandscience.github.com/the-structure-of-a-sencha-touch-application/"/>
+    <link href="http://www.appsandscience.com/the-structure-of-a-sencha-touch-application/"/>
     <updated>2012-03-05T02:00:00-06:00</updated>
-    <id>http://appsandscience.github.com/the-structure-of-a-sencha-touch-application</id>
+    <id>http://www.appsandscience.com/the-structure-of-a-sencha-touch-application</id>
     <content type="html"><![CDATA[<p>In previous posts, I described the <a href="http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/">advantages of using Sencha Touch</a> for developing mobile applications, and I introduced <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">a few terms used in Sencha Touch</a>. In this post I will continue describing Sencha Touch by explaining the code in a simple application that finds the bars near the user. (I first describe CityBars in a <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">previous blog post</a>.</p>
 
 <p>The emphasis of this post will be on describing how code should be organized in Sencha Touch applications, and on analyzing the code of two important files that each Sencha Touch application must have.</p>
@@ -688,9 +688,9 @@ Ext.application({
   
   <entry>
     <title type="html"><![CDATA[Making Sense of Sencha Touch: The CityBars App - Views]]></title>
-    <link href="http://appsandscience.github.com/making-sense-of-sencha-touch-the-citybars-app-views/"/>
+    <link href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/"/>
     <updated>2012-02-20T02:00:00-06:00</updated>
-    <id>http://appsandscience.github.com/making-sense-of-sencha-touch-the-citybars-app-views</id>
+    <id>http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views</id>
     <content type="html"><![CDATA[<p>In a previous <a href="http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/">post</a>, I described the advantages of using Sencha Touch to develop applications for mobile platforms. In this post I would like to describe a few Sencha Touch concepts.</p>
 
 <p>If you would like to see how a Sencha Touch application works, check out the <a href="http://dev.sencha.com/deploy/touch/examples/kitchensink/">kitchensink</a> application that has been created by the developers of Sencha Touch. You will be able to preview the JavaScript code that generates these views and you will be surprised by the relative short length of the code, at least compared to that necessary in Objective-C.</p>
@@ -709,9 +709,9 @@ Ext.application({
   
   <entry>
     <title type="html"><![CDATA[Creating an iPhone application with JavaScript: The Sencha Touch solution]]></title>
-    <link href="http://appsandscience.github.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/"/>
+    <link href="http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/"/>
     <updated>2012-02-13T02:00:00-06:00</updated>
-    <id>http://appsandscience.github.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution</id>
+    <id>http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution</id>
     <content type="html"><![CDATA[<p><img class="left" src="http://appsandscience.com/images/sencha.png" width="200" height="250" title="Sencha Touch logo" alt="Sencha Touch logo"></p>
 
 <p>During the past few months, I spent countless hours studying Objective-C, the language used for iPhone and iPad app development. Just to give you an idea, the books and tutorials I have studied from include</p>
