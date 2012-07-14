@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tiggzi | Apps and Science]]></title>
   <link href="http://www.appsandscience.com/blog/categories/tiggzi/atom.xml" rel="self"/>
   <link href="http://www.appsandscience.com/"/>
-  <updated>2012-07-14T10:33:57-05:00</updated>
+  <updated>2012-07-14T12:08:57-05:00</updated>
   <id>http://www.appsandscience.com/</id>
   <author>
     <name><![CDATA[Nikos Bentenitis]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Creating an iPhone application without coding: The Tiggzi solution]]></title>
-    <link href="http://www.appsandscience.com/creating-an-iphone-application-without-coding-the-tiggzi-solution/"/>
+    <link href="http://www.appsandscience.com/2012/02/creating-an-iphone-application-without-coding-the-tiggzi-solution/"/>
     <updated>2012-02-06T02:00:00-06:00</updated>
-    <id>http://www.appsandscience.com/creating-an-iphone-application-without-coding-the-tiggzi-solution</id>
+    <id>http://www.appsandscience.com/2012/02/creating-an-iphone-application-without-coding-the-tiggzi-solution</id>
     <content type="html"><![CDATA[<p>For the past few weeks I have been experimenting with various tools that one can use to develop an iPhone/iPad application, without the need to program in Objective-C. In a previous blog post <a href="http://www.appsandscience.com/getting-started-on-app-development-with-a-little-help-from-canappi/">I described Canappi</a>, a tool that uses a specialized language, MDSL, to generate Objective-C code. In this post, I will describe <a href="http://www.tiggzi.com">Tiggzi</a>, a web service that creates native code for iPhone and Android applications using a coding-free graphical user interface. I will first describe the advantages and disadvantages of Tiggzi, and I will then share with you my recommendation about the service.</p>
 
 <h3>Advantages</h3>
