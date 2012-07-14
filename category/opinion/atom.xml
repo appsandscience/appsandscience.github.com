@@ -2,9 +2,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Opinion | Apps and Science]]></title>
-  <link href="http://www.appsandscience.com/blog/categories/opinion/atom.xml" rel="self"/>
+  <link href="http://www.appsandscience.com/category/opinion/atom.xml" rel="self"/>
   <link href="http://www.appsandscience.com/"/>
-  <updated>2012-07-14T12:08:57-05:00</updated>
+  <updated>2012-07-14T12:11:22-05:00</updated>
   <id>http://www.appsandscience.com/</id>
   <author>
     <name><![CDATA[Nikos Bentenitis]]></name>
