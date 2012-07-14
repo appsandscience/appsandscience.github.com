@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>About - Apps and Science</title>
+  <title>Creating an iPhone application without coding: The Tiggzi solution - Apps and Science</title>
   <meta name="author" content="Nikos Bentenitis">
 
   
-  <meta name="description" content="About Jan 7th, 2012 Welcome to the AppsAndScience.com blog! This blog describes what I will learn while creating science apps for the iPhone and the &hellip;">
+  <meta name="description" content="For the past few weeks I have been experimenting with various tools that one can use to develop an iPhone/iPad application, without the need to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://www.appsandscience.com/about/">
+  <link rel="canonical" href="http://www.appsandscience.com/creating-an-iphone-application-without-coding-the-tiggzi-solution/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -78,36 +78,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">About</h1>
-    <p class="meta">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-01-07T16:26:00-06:00" pubdate data-updated="true">Jan 7<span>th</span>, 2012</time></p>
-  </header>
-  
-  <p>Welcome to the AppsAndScience.com blog! This blog describes what I will learn while creating science apps for the iPhone and the iPad.</p>
-
-<p>I am a scientist with a limited knowledge of programming but with a great interest in creating science apps. Thinking that &#8220;it can&#8217;t be that hard to create an app,&#8221; I got started in app development in December 2011.</p>
-
-<p>Subscribe to this blog via <a href="http://feedburner.google.com/fb/a/mailverify?uri=AppsAndScience&amp;loc=en_US">email</a> or <a href="http://feeds.feedburner.com/AppsAndScience">RSS</a> to follow my progress.</p>
-
-  
-    <footer>
+    
+      <h1 class="entry-title">Creating an iPhone Application Without Coding: The Tiggzi Solution</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -119,13 +98,78 @@
   
 
 
-<time datetime="2012-01-07T16:26:00-06:00" pubdate data-updated="true">Jan 7<span>th</span>, 2012</time>
+<time datetime="2012-02-06T02:00:00-06:00" pubdate data-updated="true">Feb 6<span>th</span>, 2012</time>
         
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>For the past few weeks I have been experimenting with various tools that one can use to develop an iPhone/iPad application, without the need to program in Objective-C. In a previous blog post <a href="http://www.appsandscience.com/getting-started-on-app-development-with-a-little-help-from-canappi/">I described Canappi</a>, a tool that uses a specialized language, MDSL, to generate Objective-C code. In this post, I will describe <a href="http://www.tiggzi.com">Tiggzi</a>, a web service that creates native code for iPhone and Android applications using a coding-free graphical user interface. I will first describe the advantages and disadvantages of Tiggzi, and I will then share with you my recommendation about the service.</p>
+
+<h3>Advantages</h3>
+
+<ol>
+<li><p>Tiggzi does not require any coding. Dragging and dropping widgets on a canvas is the only thing that is required from a user of Tiggzi.</p></li>
+<li><p>The applications created by Tiggzi can be be run on iPhones and iPads as well as on Android devices and mobile-phone browsers.</p></li>
+<li><p>Creating application screens is straightforward in Tiggzi, and transitioning between those screens is very easy. Also, each button, label, image can navigate to a new screen by selecting the appropriate settings.</p></li>
+<li><p>It is very easy for a user to define and connect to REST services. Importing data using JSON, for instance, is very easy and the results of the queries can be easily included in a table view. This common task is handled very well in Tiggzi and a tutorial on Tiggzi&#8217;s website explains the process step-by-step.</p></li>
+<li><p>The source code that Tiggzi generates is a collection of HTML and CSS files bundled with PhoneGap. That code can be edited in Apple&#8217;s XCode.</p></li>
+<li><p>The Tiggzi website contains several well-presented tutorials that describe the creation of data-driven applications, which are common in business.</p></li>
+<li><p>Tiggzi makes it very easy to share an application with testers and clients by supplying a custom URL with the HTML/CSS source code of the application. In the paid version, Tiggzi allows team members to collaborative on the creation of the applications.</p></li>
+<li><p>For Android applications Tiggzi provides an app that runs the code generated by Tiggzi natively on the phone, even before the application is launched and submitted in the Android marketplace.</p></li>
+</ol>
+
+
+<p>Despite its great number of advantages, Tiggzi may not be the platform that some developers may choose. That&#8217;s because the service has a few disadvantages.</p>
+
+<h3>Disadvantages</h3>
+
+<ol>
+<li><p>Tiggzi does not generate native GUI elements, at least for the iPhone that I tested it with. As a result, applications do not feel native. In addition, I had several problems using a table view, a common element in the business applications that I am interested in creating.</p></li>
+<li><p>The service is not free. Tiggzi has several subscription levels but the free version provides a great feel for the service. (The free tier is currently limited to one project and on constructing three screens.)</p></li>
+<li><p>A developer depends on the web-interface to create the application. That interface may change as a function of time. Although this might not be a disadvantage, provided that the interface improves.</p></li>
+</ol>
+
+
+<p>Although Tiggzi has a lot of advantages, the lack of non-native GUI elements, might stop developers from using the service to create polished applications. However, Tiggzi provides a simple interface for creating apps and for sharing working prototypes with testers and clients.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-        <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.appsandscience.com/about/index.html" data-via="nikosbentenitis" data-counturl="http://www.appsandscience.com/about/index.html" >Tweet</a>
+
+<span class="byline author vcard">Posted by <span class="fn">Nikos Bentenitis</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-06T02:00:00-06:00" pubdate data-updated="true">Feb 6<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/tiggzi/'>Tiggzi</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.appsandscience.com/creating-an-iphone-application-without-coding-the-tiggzi-solution/" data-via="nikosbentenitis" data-counturl="http://www.appsandscience.com/creating-an-iphone-application-without-coding-the-tiggzi-solution/" >Tweet</a>
   
   
   
@@ -133,9 +177,16 @@
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/getting-started-on-app-development-with-a-little-help-from-canappi/" title="Previous Post: Getting Started on App Development with a Little Help from Canappi">&laquo; Getting Started on App Development with a Little Help from Canappi</a>
+      
+      
+        <a class="basic-alignment right" href="/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/" title="Next Post: Creating an iPhone application with JavaScript: The Sencha Touch solution">Creating an iPhone application with JavaScript: The Sencha Touch solution &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
   <section>
@@ -224,8 +275,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://www.appsandscience.com/about/index.html';
-        var disqus_url = 'http://www.appsandscience.com/about/index.html';
+        var disqus_identifier = 'http://www.appsandscience.com/creating-an-iphone-application-without-coding-the-tiggzi-solution/';
+        var disqus_url = 'http://www.appsandscience.com/creating-an-iphone-application-without-coding-the-tiggzi-solution/';
         var disqus_script = 'embed.js';
       
     (function () {

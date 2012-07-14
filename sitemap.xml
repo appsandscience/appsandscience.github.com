@@ -1,62 +1,56 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://www.appsandscience.com/2012/01/welcome-to-apps-and-science-blog/</loc>
+        <loc>http://www.appsandscience.com/welcome-to-apps-and-science-blog/</loc>
         <lastmod>2012-07-14T12:23:04-05:00</lastmod>
     </url>
     <url>
         <loc>
-            http://www.appsandscience.com/2012/01/getting-started-with-developing-ios-apps-hardware/
+            http://www.appsandscience.com/getting-started-with-developing-ios-apps-hardware/
         </loc>
         <lastmod>2012-07-14T12:22:59-05:00</lastmod>
     </url>
     <url>
         <loc>
-            http://www.appsandscience.com/2012/01/five-reasons-why-you-see-more-and-more-people-with-iphones/
+            http://www.appsandscience.com/five-reasons-why-you-see-more-and-more-people-with-iphones/
         </loc>
         <lastmod>2012-07-14T12:23:09-05:00</lastmod>
     </url>
     <url>
         <loc>
-            http://www.appsandscience.com/2012/01/getting-started-on-app-development-with-a-little-help-from-canappi/
+            http://www.appsandscience.com/getting-started-on-app-development-with-a-little-help-from-canappi/
         </loc>
-        <lastmod>2012-07-14T12:23:14-05:00</lastmod>
+        <lastmod>2012-07-14T12:59:39-05:00</lastmod>
     </url>
     <url>
         <loc>
-            http://www.appsandscience.com/2012/02/creating-an-iphone-application-without-coding-the-tiggzi-solution/
+            http://www.appsandscience.com/creating-an-iphone-application-without-coding-the-tiggzi-solution/
         </loc>
         <lastmod>2012-07-14T12:23:19-05:00</lastmod>
     </url>
     <url>
         <loc>
-            http://www.appsandscience.com/2012/02/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/
+            http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/
         </loc>
         <lastmod>2012-07-14T12:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>
-            http://www.appsandscience.com/2012/02/making-sense-of-sencha-touch-the-citybars-app-views/
+            http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/
         </loc>
-        <lastmod>2012-07-14T12:23:27-05:00</lastmod>
+        <lastmod>2012-07-14T13:11:31-05:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://www.appsandscience.com/2012/03/the-structure-of-a-sencha-touch-application/
-        </loc>
-        <lastmod>2012-07-14T12:23:32-05:00</lastmod>
+        <loc>http://www.appsandscience.com/the-structure-of-a-sencha-touch-application/</loc>
+        <lastmod>2012-07-14T12:58:34-05:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://www.appsandscience.com/2012/03/how-to-write-code-for-the-views-in-sencha-touch/
-        </loc>
-        <lastmod>2012-07-14T12:23:39-05:00</lastmod>
+        <loc>http://www.appsandscience.com/how-to-write-code-for-the-views-in-sencha-touch/</loc>
+        <lastmod>2012-07-14T12:55:21-05:00</lastmod>
     </url>
     <url>
-        <loc>
-            http://www.appsandscience.com/2012/04/the-structure-of-a-sencha-touch-controller-2/
-        </loc>
-        <lastmod>2012-07-14T12:23:43-05:00</lastmod>
+        <loc>http://www.appsandscience.com/the-structure-of-a-sencha-touch-controller-2/</loc>
+        <lastmod>2012-07-14T12:52:14-05:00</lastmod>
     </url>
     <url>
         <loc>http://www.appsandscience.com/about/</loc>
@@ -64,10 +58,10 @@
     </url>
     <url>
         <loc>http://www.appsandscience.com/blog/archives/</loc>
-        <lastmod>2012-07-14T12:23:43-05:00</lastmod>
+        <lastmod>2012-07-14T13:11:31-05:00</lastmod>
     </url>
     <url>
         <loc>http://www.appsandscience.com/</loc>
-        <lastmod>2012-07-14T12:23:43-05:00</lastmod>
+        <lastmod>2012-07-14T13:11:31-05:00</lastmod>
     </url>
 </urlset>

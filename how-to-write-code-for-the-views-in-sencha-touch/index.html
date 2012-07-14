@@ -1,0 +1,789 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>How to Write Code for the Views in Sencha Touch - Apps and Science</title>
+  <meta name="author" content="Nikos Bentenitis">
+
+  
+  <meta name="description" content="In the past few blog posts, I described few basic terms used in Sencha Touch and explained the code in designer.html and designer.js from the &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://www.appsandscience.com/how-to-write-code-for-the-views-in-sencha-touch/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/AppsAndScience" rel="alternate" title="Apps and Science" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-4533714-3']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Apps and Science</a></h1>
+  
+    <h2>Science apps for iPhone, iPad, Android, and Web</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="http://feeds.feedburner.com/AppsAndScience" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="http://feedburner.google.com/fb/a/mailverify?uri=AppsAndScience&amp;loc=en_US" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:www.appsandscience.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">How to Write Code for the Views in Sencha Touch</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-12T02:00:00-05:00" pubdate data-updated="true">Mar 12<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In the past few blog posts, I described <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">few basic terms</a> used in Sencha Touch and <a href="http://www.appsandscience.com/the-structure-of-a-sencha-touch-application/">explained the code in designer.html and designer.js</a> from the CityBars application, that I have <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">described before</a>. In this post, I will briefly explain the code in the three Views of the application and in a future post, I will describe the remaining components of the application.</p>
+
+<p>The first view to describe is <strong>MainNav</strong>, the code of which is stored under <strong>app/view/MainNav.js</strong>, according to the MVCS guidelines provided by Sencha. (See my <a href="http://www.appsandscience.com/the-structure-of-a-sencha-touch-application/">previous post</a> for details on the MVCS model.) The code of <strong>MainNav.js</strong> is reproduced below:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.view.MainNav&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.NavigationView&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span> <span class="s1">&#39;CityBars.view.ListContainer&#39;</span> <span class="p">],</span>
+</span><span class='line'><span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;light&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">navigationBar</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;light&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;listcontainer&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;CityBars&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;listCard&#39;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let’s analyze it step-by-step. The first few lines of the code</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.view.MainNav&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.NavigationView&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span> <span class="s1">&#39;CityBars.view.ListContainer&#39;</span> <span class="p">],</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>specify that the view is part of the CityBars application, that the view is called <strong>MainNav</strong> and that its code is stored under the <strong>view</strong> subdirectory of the <strong>app</strong> directory. The <strong>MainNav</strong> View is a <strong>NavigationView</strong>, a standard component of the Sencha Touch framework. For <strong>MainNav</strong> to work, another view, called <strong>ListContainer</strong>, also stored under the <strong>view</strong> subdirectory, is necessary. (I will describe the <strong>ListContainer</strong> view in a little bit.) The rest of the code describes the components that <strong>MainNav</strong> consists of. As I mentioned before, <strong>MainNav</strong> is a special case of a standard Sencha-Touch component called <strong>NavigationView</strong>. The generic <strong>NavigationView</strong> has to be specialized for this applications, and that is achieved with the following code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;light&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">navigationBar</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;light&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;listcontainer&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;CityBars&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;listCard&#39;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>According to the code above, the theme of the <strong>NavigationView</strong> is <em>light</em>, which means that colors have lighter shades, and also that the navigation bar at the top of the <strong>NavigationView</strong> is colored lightly. The view has one component, a <strong>Container</strong> with a list, and a nickname (xtype) of <em>listcontainer</em>. The title of the <em>listcontainer</em> is ‘CityBars’ and its identification string is <em>listCard</em>. The identification string (id) is added so that the <strong>Controller</strong>, the “mind,” of the application, can refer to it easily. (Although for this application, the controller does not use this information.)</p>
+
+<p>The <em>listcontainer</em> that was first introduced above has to be defined. The code for the component is stored under <strong>app/view/ListContainer.js</strong> and that file contains the following code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.view.ListContainer&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.Container&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;fit&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;list&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;dataList&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">itemTpl</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                <span class="s1">&#39;&lt;img class=&quot;photo&quot; src=&quot;{photo_url}&quot; width=&quot;40&quot; height=&quot;40&quot;/&gt;{name}&lt;br/&gt;&lt;img src=&quot;{rating_img_url_small}&quot;/&gt;&amp;nbsp;&lt;small&gt;{address1}&lt;/small&gt;&#39;</span>
+</span><span class='line'>            <span class="p">]</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first two lines of the code</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.view.ListContainer&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.Container&#39;</span><span class="p">,</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>specify that the view is part of the CityBars application, that it is called <strong>ListContainer</strong> and that its code is stored under the <strong>view</strong> subdirectory. The <strong>ListContainer</strong> View is a <strong>Container</strong>, a standard component of the Sencha Touch framework. As before, the generic <strong>Container</strong> needs to be configured with the components of our interest, in this case a list. This is achieved with the <em>config</em> statement:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>    <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;fit&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;list&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;dataList&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">itemTpl</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                <span class="s1">&#39;&lt;img class=&quot;photo&quot; src=&quot;{photo_url}&quot; width=&quot;40&quot; height=&quot;40&quot;/&gt;{name}&lt;br/&gt;&lt;img src=&quot;{rating_img_url_small}&quot;/&gt;&amp;nbsp;&lt;small&gt;{address1}&lt;/small&gt;&#39;</span>
+</span><span class='line'>            <span class="p">]</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <em>config</em> statement specifies that layout of the <strong>Container</strong> is <em>fit</em>, which means that every component takes the whole width of the device that the application is running on. The only item in the <strong>ListContainer</strong> is a list, with the standard Sencha-Touch type <strong>list</strong> and the identification string of <em>datalist</em>. Every item in the list is rendered according to the html template shown in <em>itemTpl</em>. According to that template, a 40×40 photo, the name of the bar, its rating and its address are displayed in that order.</p>
+
+<p>When a user taps on one of the items of the list, the application displays additional information about the item tapped. Although, at this point, I have not explained how the program will perform that logic (“if a user taps on an item, show a panel with details about the bar”,) let’s assume that the application does that somehow. (I will explain how this is done in a future post). Once the panel with details appears, a View called <strong>DetailPanel</strong> is displayed. The code for that view is shown below:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.view.DetailPanel&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'><span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.tab.Panel&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">tabBar</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">docked</span><span class="o">:</span> <span class="s1">&#39;top&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">pack</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;hbox&#39;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;contact&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Contact&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">iconCls</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                <span class="p">{</span>
+</span><span class='line'>                    <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">padding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;hbox&#39;</span>
+</span><span class='line'>                    <span class="p">},</span>
+</span><span class='line'>                    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                        <span class="p">{</span>
+</span><span class='line'>                            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;component&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">height</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;photo&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">tpl</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                                <span class="s1">&#39;&lt;img class=&quot;photo&quot; src=&quot;{photo_url}&quot; width=&quot;100&quot; height=&quot;100&quot;/&gt;&#39;</span>
+</span><span class='line'>                            <span class="p">],</span>
+</span><span class='line'>                            <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span>
+</span><span class='line'>                        <span class="p">},</span>
+</span><span class='line'>                        <span class="p">{</span>
+</span><span class='line'>                            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;component&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">padding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">tpl</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                                <span class="s1">&#39;&lt;h2&gt;{name}&lt;/h2&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                                <span class="s1">&#39;           &lt;div class=&quot;info&quot;&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                                <span class="s1">&#39;           {address1}&lt;br/&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                                <span class="s1">&#39;           &lt;img src=&quot;{rating_img_url_small}&quot;/&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                                <span class="s1">&#39;           &lt;/div&gt;&#39;</span>
+</span><span class='line'>                            <span class="p">]</span>
+</span><span class='line'>                        <span class="p">}</span>
+</span><span class='line'>                    <span class="p">]</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>                <span class="p">{</span>
+</span><span class='line'>                    <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nx">pack</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+</span><span class='line'>                        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;hbox&#39;</span>
+</span><span class='line'>                    <span class="p">},</span>
+</span><span class='line'>                    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                        <span class="p">{</span>
+</span><span class='line'>                            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;button&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Call&#39;</span>
+</span><span class='line'>                        <span class="p">},</span>
+</span><span class='line'>                        <span class="p">{</span>
+</span><span class='line'>                            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;spacer&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">width</span><span class="o">:</span> <span class="mi">57</span>
+</span><span class='line'>                        <span class="p">},</span>
+</span><span class='line'>                        <span class="p">{</span>
+</span><span class='line'>                            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;button&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;More&#39;</span>
+</span><span class='line'>                        <span class="p">}</span>
+</span><span class='line'>                    <span class="p">]</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="p">]</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;detailMap&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Map&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">iconCls</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To understand the code shown above, refer to an example detail view, shown on the figures below.</p>
+
+<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/03/CityBars2-207x300.png">!</a></p>
+
+<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/03/CityBars2.png">!</a></p>
+
+<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/03/CityBars3-207x300.png">!</a></p>
+
+<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/03/CityBars3.png">!</a></p>
+
+<p>The detail view contains a tab panel with two tabs: The first tab consists of two Container components: The first Container shows an image of the bar, its name, its address, and its rating. The second Container is stacked below the first, and contains two buttons: one that can be used to call the bar and one to that can be tapped to get more information about the bar. Both buttons are inactive in this version of the application.</p>
+
+<p>The second tab panel consists of a Map component that displays the location of the bar on a Google map.</p>
+
+<p>As a result of this arrangement, a tab panel has to be defined using the following code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'> <span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.view.DetailPanel&#39;</span><span class="p">,</span> <span class="p">{</span>     <span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.tab.Panel&#39;</span><span class="p">,</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>which describes, as before, that the code for this panel is stored under <strong>app/view/DetailPanel.js</strong>, and that the panel is a special case of a Sencha-Touch component called <strong>tab.Panel</strong>. The configuration of the tab panel is achieved using the following code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>     <span class="nx">tabBar</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">docked</span><span class="o">:</span> <span class="s1">&#39;top&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">pack</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;hbox&#39;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>According to the code above, the tab bar is docked at the top of the screen, it has a <em>dark</em> theme and lays out its tabs horizontally (hbox) and centered at the center of the tab panel.</p>
+
+<p>The first tab called ‘Contact’ is the most complicated and it is set up in the following code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;contact&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Contact&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">iconCls</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">items</span><span class="o">:</span> <span class="p">[{</span>
+</span><span class='line'>        <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">padding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;hbox&#39;</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>        <span class="nx">items</span><span class="o">:</span> <span class="p">[{</span>
+</span><span class='line'>                <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;component&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">height</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;photo&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">tpl</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&lt;img class=&quot;photo&quot; src=&quot;{photo_url}&quot; width=&quot;100&quot; height=&quot;100&quot;/&gt;&#39;</span><span class="p">,</span>                     <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>                <span class="p">{</span>
+</span><span class='line'>                <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;component&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">padding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">tpl</span><span class="o">:</span> <span class="p">[</span>  <span class="s1">&#39;&lt;h2&gt;{name}&lt;/h2&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                        <span class="s1">&#39;&lt;div class=&quot;info&quot;&#39;</span><span class="p">,</span>
+</span><span class='line'>                        <span class="s1">&#39;{address1}&lt;br/&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                        <span class="s1">&#39;&lt;img src=&quot;{rating_img_url_small}&quot;/&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                        <span class="s1">&#39;&lt;/div&gt;&#39;</span>
+</span><span class='line'>                        <span class="p">]</span>
+</span><span class='line'>                <span class="p">}]},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">pack</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;hbox&#39;</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>            <span class="nx">items</span><span class="o">:</span> <span class="p">[{</span>
+</span><span class='line'>                    <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;button&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Call&#39;</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>                <span class="p">{</span>
+</span><span class='line'>                    <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;spacer&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">width</span><span class="o">:</span> <span class="mi">57</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>                <span class="p">{</span>
+</span><span class='line'>                    <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;button&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;More&#39;</span>
+</span><span class='line'>                <span class="p">}]</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="p">]},</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first tab is a Sencha-Touch <strong>Container</strong>, with identification <em>contact</em>, title <em>Contact</em>, and has an info icon associated with it (Because this tab panel is docked at the top of the container, the icon is not visible; the icon would be visible if the tab panel were docked at the bottom of the view). This tab contains two <strong>Containers</strong>, as mentioned above. One is the <em>info</em> container that arranges its items horizontally (hbox). The items in it are a 100×100 photo with identification <em>photo</em>, and an html string (with id <em>data</em>) that contains the name, the address and the rating of the bar. The second <strong>Container</strong> centers its three items horizontally; its items are a button with the text <em>Call</em>, a spacer, and a second button with the text <em>More</em>.</p>
+
+<p>The second tab, described with the code below, is a map type with identification <em>detailMap</em>, with title ‘Map’ and an <em>info</em> icon. (As before, because the tab panel is docked at the top of the view, the icon is not visible.). The code below</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;detailMap&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Map&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">iconCls</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>describes that when the ‘Map’ tab is tapped, a Google map of the bar is shown.</p>
+
+<p>But how the application knows to perform such an action?</p>
+
+<p>The mechanism for this action, as well as that for the action resulting from the user tapping on a list item will be described in a following post that will focus on the application’s <strong>Controller</strong>, as well as on the way by which the application retrieves its data.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Nikos Bentenitis</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-12T02:00:00-05:00" pubdate data-updated="true">Mar 12<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/sencha-touch/'>Sencha Touch</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.appsandscience.com/how-to-write-code-for-the-views-in-sencha-touch/" data-via="nikosbentenitis" data-counturl="http://www.appsandscience.com/how-to-write-code-for-the-views-in-sencha-touch/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/the-structure-of-a-sencha-touch-application/" title="Previous Post: The Structure of a Sencha Touch Application">&laquo; The Structure of a Sencha Touch Application</a>
+      
+      
+        <a class="basic-alignment right" href="/the-structure-of-a-sencha-touch-controller-2/" title="Next Post: The Structure of a Sencha Touch Controller">The Structure of a Sencha Touch Controller &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/the-structure-of-a-sencha-touch-controller-2/">The Structure of a Sencha Touch Controller</a>
+      </li>
+    
+      <li class="post">
+        <a href="/how-to-write-code-for-the-views-in-sencha-touch/">How to Write Code for the Views in Sencha Touch</a>
+      </li>
+    
+      <li class="post">
+        <a href="/the-structure-of-a-sencha-touch-application/">The Structure of a Sencha Touch Application</a>
+      </li>
+    
+      <li class="post">
+        <a href="/making-sense-of-sencha-touch-the-citybars-app-views/">Making Sense of Sencha Touch: The CityBars App - Views</a>
+      </li>
+    
+      <li class="post">
+        <a href="/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/">Creating an iPhone application with JavaScript: The Sencha Touch solution</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("nikosbentenitis", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/nikosbentenitis" class="twitter-follow-button" data-show-count="false">Follow @nikosbentenitis</a>
+  
+</section>
+
+
+
+<section class="googleplus googleplus-hidden">
+  <h1>
+    <a href="https://plus.google.com/103718391619641233630?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Nikos Bentenitis -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'appsandscience';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://www.appsandscience.com/how-to-write-code-for-the-views-in-sencha-touch/';
+        var disqus_url = 'http://www.appsandscience.com/how-to-write-code-for-the-views-in-sencha-touch/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

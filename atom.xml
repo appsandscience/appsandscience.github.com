@@ -4,7 +4,7 @@
   <title><![CDATA[Apps and Science]]></title>
   <link href="http://www.appsandscience.com/atom.xml" rel="self"/>
   <link href="http://www.appsandscience.com/"/>
-  <updated>2012-07-14T12:33:57-05:00</updated>
+  <updated>2012-07-14T13:11:32-05:00</updated>
   <id>http://www.appsandscience.com/</id>
   <author>
     <name><![CDATA[Nikos Bentenitis]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[The Structure of a Sencha Touch Controller]]></title>
-    <link href="http://www.appsandscience.com/2012/04/the-structure-of-a-sencha-touch-controller-2/"/>
+    <link href="http://www.appsandscience.com/the-structure-of-a-sencha-touch-controller-2/"/>
     <updated>2012-04-16T02:00:33-05:00</updated>
-    <id>http://www.appsandscience.com/2012/04/the-structure-of-a-sencha-touch-controller-2</id>
+    <id>http://www.appsandscience.com/the-structure-of-a-sencha-touch-controller-2</id>
     <content type="html"><![CDATA[<p>In the past three blog posts, I used the CityBars Sencha Touch application, to</p>
 
 <ol>
@@ -42,24 +42,38 @@
 
 <p>To be able to read the values of some interface elements, and to set or manipulate them, the controller needs a reference to them. Each reference within the controller is defined as a pair. For instance the list of bars in the ListContainer, has an id of <em>#datalist</em> (see <a href="http://www.appsandscience.com/how-to-write-code-for-the-views-in-sencha-touch/">my previous blog post</a> for a description of the views of the application.) This list of bars is referred to by the controller as dataList. The exact syntax is shown below:</p>
 
-<pre><code>Ext.define('CityBars.controller.Business', {
-    extend: 'Ext.app.Controller',
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.controller.Business&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.app.Controller&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">refs</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">dataList</span><span class="o">:</span> <span class="s1">&#39;#dataList&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">listCard</span><span class="o">:</span> <span class="s1">&#39;#listCard&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">mainNav</span><span class="o">:</span> <span class="s1">&#39;mainnav&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">detailCard</span><span class="o">:</span> <span class="s1">&#39;#detailCard&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">control</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s2">&quot;#dataList&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">itemtap</span><span class="o">:</span> <span class="s1">&#39;onListItemTap&#39;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
 
-config: {
-    refs: {
-        dataList: '#dataList',
-        listCard: '#listCard',
-        mainNav: 'mainnav',
-        detailCard: '#detailCard'
-    },
-
-    control: {
-        "#dataList": {
-            itemtap: 'onListItemTap'
-        }
-    }
-},
-</code></pre>
 
 <p>In the code snippet above, the first line is used to define the controller&#8217;s name (Business) and to declare it as a controller, as opposed to a view, for instance. The config part of the code has two parts. The <em>refs</em> part that I referred to above and the control part, that I will explain in a bit. Notice the four of references.</p>
 
@@ -79,15 +93,24 @@ config: {
 
 <p>Sencha Touch contains a few utilities that access the information that a phone can supply. In the case of geolocation, Sencha Touch uses <em>Ext.util.Geolocation</em>. The function to get the user&#8217;s location is called <strong>getLocation</strong> in this application, and it is shown below:</p>
 
-<pre><code>getLocation: function(callback) {
-    if (navigator &amp;&amp; navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            callback(position);
-        }, function(error) {
-            alert('You are not connected to the Internet');
-        });
-    }
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">getLocation</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">navigator</span> <span class="o">&amp;&amp;</span> <span class="nx">navigator</span><span class="p">.</span><span class="nx">geolocation</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">navigator</span><span class="p">.</span><span class="nx">geolocation</span><span class="p">.</span><span class="nx">getCurrentPosition</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">position</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">callback</span><span class="p">(</span><span class="nx">position</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;You are not connected to the Internet&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>The function above checks whether the user is connected to the internet, and if yes, it returns the user&#8217;s latitude and longitude.</p>
 
@@ -99,25 +122,42 @@ config: {
 
 <p>The information about a store is kept in a file under the <em>store</em> directory. The contents of that file are shown below:</p>
 
-<pre><code>Ext.define('CityBars.store.BusinessStore', {
-    extend: 'Ext.data.Store',
-    requires: [
-        'CityBars.model.Business'
-    ],
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.store.BusinessStore&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.data.Store&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">requires</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="s1">&#39;CityBars.model.Business&#39;</span>
+</span><span class='line'>    <span class="p">],</span>
+</span><span class='line'><span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">model</span><span class="o">:</span> <span class="s1">&#39;CityBars.model.Business&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">storeId</span><span class="o">:</span> <span class="s1">&#39;BusinessStore&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">proxy</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;jsonp&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">reader</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;json&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">rootProperty</span><span class="o">:</span> <span class="s1">&#39;businesses&#39;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
 
-config: {
-    model: 'CityBars.model.Business',
-    storeId: 'BusinessStore',
-    proxy: {
-        type: 'jsonp',
-        reader: {
-            type: 'json',
-            rootProperty: 'businesses'
-        }
-    }
-}
-});
-</code></pre>
 
 <p>First, the store is given a name <em>BusinessStore</em> and declared as a store. Because the store always corresponds to a model, this is declared with the requires statemement. The store is configured with the model that it is related to, an id is given to it for easy referencing, and information about the connection is displayed in the reader statement. Because the information is pulled from an external website (Yelp,) the type of the store is <strong>jsonp</strong>. Because the information is returned from Yelp as a JSON file, the reader of the file is of <strong>json</strong> type, and only everything under the <strong>businesses</strong> property is read.</p>
 
@@ -125,51 +165,96 @@ config: {
 
 <p>The information about a model is kept in a JavaScript file under the <em>model</em> directory. The contents of the file are shown below:</p>
 
-<pre><code>Ext.define('CityBars.model.Business', {
-    extend: 'Ext.data.Model',
-    config: {
-        fields: [
-            {
-                name: 'id',
-                type: 'int'
-            },
-            {
-                name: 'name'
-            },
-            {
-                name: 'latitude'
-            },
-            {
-                name: 'longitude'
-            },
-            {
-                name: 'address1'
-            },
-            {
-                name: 'address2'
-            },
-            {
-                name: 'address3'
-            },
-            {
-                name: 'phone'
-            },
-            {
-                name: 'state_code'
-            },
-            {
-                name: 'mobile_url'
-            },
-            {
-                name: 'rating_img_url_small'
-            },
-            {
-                name: 'photo_url'
-            }
-        ]
-    }
-});
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.model.Business&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.data.Model&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">fields</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;int&#39;</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;name&#39;</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;latitude&#39;</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;longitude&#39;</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;address1&#39;</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;address2&#39;</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;address3&#39;</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;phone&#39;</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;state_code&#39;</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;mobile_url&#39;</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;rating_img_url_small&#39;</span>
+</span><span class='line'>            <span class="p">},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>                <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;photo_url&#39;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">]</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>This model is given a name, <em>Business</em>, and it is declared as a model. Then the fields served by the JSON file are described. They are id, name, latitude, longitude, etc. Those fields can be found on Yelp&#8217;s website.</p>
 
@@ -177,14 +262,22 @@ config: {
 
 <p>Now that the model and the store for the application have been defined, the controller, can perform a search and serve the information to the user. This is done with the following code:</p>
 
-<pre><code>init: function() {
-    this.getLocation(function (location) {
-        this.getBusinesses(location, function (store) {
-            this.getDataList().setStore(store);
-        });
-    });
-},
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">getLocation</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">location</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">getBusinesses</span><span class="p">(</span><span class="nx">location</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">store</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">this</span><span class="p">.</span><span class="nx">getDataList</span><span class="p">().</span><span class="nx">setStore</span><span class="p">(</span><span class="nx">store</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>In the few lines of code above, a lot of logic for the application is contained. First, the function that is defined in the above lines is run when the controller is initialized, and that is as soon as the application launches. Each line after the first starts with <strong>this</strong>, a shortcut to the current controller. In other words, when the controller initializes, the <strong>getLocation</strong> function contained in the same file is run, then the <strong>getLocation</strong> function is run and finally the store for the <strong>dataList</strong> defined above is set to the store that was also defined above. With the sequence of these steps, the initial list of the application is populated with entries, and the controller is ready to respond to the user&#8217;s taps.</p>
 
@@ -192,32 +285,50 @@ config: {
 
 <p>The function executed when a list item is tapped is shown below:</p>
 
-<pre><code>onListItemTap: function(dataview, index, target, record, e, options) {
-    if (record) {
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">onListItemTap</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dataview</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">target</span><span class="p">,</span> <span class="nx">record</span><span class="p">,</span> <span class="nx">e</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">record</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">details</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">this</span><span class="p">.</span><span class="nx">details</span> <span class="o">=</span> <span class="nx">Ext</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;CityBars.view.DetailPanel&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Details&#39;</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">map</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">details</span><span class="p">.</span><span class="nx">child</span><span class="p">(</span><span class="s1">&#39;#detailMap&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">map</span><span class="p">.</span><span class="nx">setMapOptions</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">zoom</span><span class="o">:</span> <span class="mi">17</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>    <span class="nx">map</span><span class="p">.</span><span class="nx">setMapCenter</span><span class="p">({</span>
+</span><span class='line'>        <span class="nx">latitude</span><span class="o">:</span> <span class="nx">record</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;latitude&#39;</span><span class="p">),</span>
+</span><span class='line'>        <span class="nx">longitude</span><span class="o">:</span> <span class="nx">record</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;longitude&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">info</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">details</span><span class="p">.</span><span class="nx">child</span><span class="p">(</span><span class="s1">&#39;#contact&#39;</span><span class="p">).</span><span class="nx">child</span><span class="p">(</span><span class="s1">&#39;#info&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">info</span><span class="p">.</span><span class="nx">child</span><span class="p">(</span><span class="s1">&#39;#photo&#39;</span><span class="p">).</span><span class="nx">setData</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">info</span><span class="p">.</span><span class="nx">child</span><span class="p">(</span><span class="s1">&#39;#data&#39;</span><span class="p">).</span><span class="nx">setData</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">getMainNav</span><span class="p">().</span><span class="nx">push</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">details</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-    if (!this.details) {
-        this.details = Ext.create('CityBars.view.DetailPanel', {
-            title: 'Details'
-        });
-    }
-
-    var map = this.details.child('#detailMap');
-    map.setMapOptions({
-        zoom: 17
-    });
-    map.setMapCenter({
-        latitude: record.get('latitude'),
-        longitude: record.get('longitude')
-    });
-
-    var info = this.details.child('#contact').child('#info');
-    info.child('#photo').setData(record.data);
-    info.child('#data').setData(record.data);
-
-    this.getMainNav().push(this.details);
-}
-}
-</code></pre>
 
 <p>The function is only run if a record exists. If a record exists and the details panel does not, a new panel is created with the title &#8216;Details&#8217;. A child of the details panel is a map of the business, with id <em>detailMap</em>. Defining the map of the business as a variable, map, allows us to easily refer to it in subsequent commands. These commands set the zoom level, and set the center of the map to the latitude and longitude of the business. Defining the container of the Detail Panel that contains the info about the business, allows us to easily refer to it in subsequent commands. These commands set the data for the photo, and the data. As soon as the assingments are made, the main navigation brings the details view in the foreground from the right side of the screen. This is called a push transition.</p>
 
@@ -231,188 +342,335 @@ config: {
   
   <entry>
     <title type="html"><![CDATA[How to Write Code for the Views in Sencha Touch]]></title>
-    <link href="http://www.appsandscience.com/2012/03/how-to-write-code-for-the-views-in-sencha-touch/"/>
+    <link href="http://www.appsandscience.com/how-to-write-code-for-the-views-in-sencha-touch/"/>
     <updated>2012-03-12T02:00:00-05:00</updated>
-    <id>http://www.appsandscience.com/2012/03/how-to-write-code-for-the-views-in-sencha-touch</id>
+    <id>http://www.appsandscience.com/how-to-write-code-for-the-views-in-sencha-touch</id>
     <content type="html"><![CDATA[<p>In the past few blog posts, I described <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">few basic terms</a> used in Sencha Touch and <a href="http://www.appsandscience.com/the-structure-of-a-sencha-touch-application/">explained the code in designer.html and designer.js</a> from the CityBars application, that I have <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">described before</a>. In this post, I will briefly explain the code in the three Views of the application and in a future post, I will describe the remaining components of the application.</p>
 
 <p>The first view to describe is <strong>MainNav</strong>, the code of which is stored under <strong>app/view/MainNav.js</strong>, according to the MVCS guidelines provided by Sencha. (See my <a href="http://www.appsandscience.com/the-structure-of-a-sencha-touch-application/">previous post</a> for details on the MVCS model.) The code of <strong>MainNav.js</strong> is reproduced below:</p>
 
-<pre><code>Ext.define('CityBars.view.MainNav', { extend: 'Ext.NavigationView',
-requires: [ 'CityBars.view.ListContainer' ],
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.view.MainNav&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.NavigationView&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span> <span class="s1">&#39;CityBars.view.ListContainer&#39;</span> <span class="p">],</span>
+</span><span class='line'><span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;light&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">navigationBar</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;light&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;listcontainer&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;CityBars&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;listCard&#39;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
 
-config: {
-    ui: 'light',
-    navigationBar: {
-        ui: 'light'
-    },
-    items: [
-        {
-            xtype: 'listcontainer',
-            title: 'CityBars',
-            id: 'listCard'
-        }
-    ]
-}
-});
-</code></pre>
 
 <p>Let’s analyze it step-by-step. The first few lines of the code</p>
 
-<pre><code>Ext.define('CityBars.view.MainNav', { extend: 'Ext.NavigationView',
-requires: [ 'CityBars.view.ListContainer' ],
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.view.MainNav&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.NavigationView&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span> <span class="s1">&#39;CityBars.view.ListContainer&#39;</span> <span class="p">],</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>specify that the view is part of the CityBars application, that the view is called <strong>MainNav</strong> and that its code is stored under the <strong>view</strong> subdirectory of the <strong>app</strong> directory. The <strong>MainNav</strong> View is a <strong>NavigationView</strong>, a standard component of the Sencha Touch framework. For <strong>MainNav</strong> to work, another view, called <strong>ListContainer</strong>, also stored under the <strong>view</strong> subdirectory, is necessary. (I will describe the <strong>ListContainer</strong> view in a little bit.) The rest of the code describes the components that <strong>MainNav</strong> consists of. As I mentioned before, <strong>MainNav</strong> is a special case of a standard Sencha-Touch component called <strong>NavigationView</strong>. The generic <strong>NavigationView</strong> has to be specialized for this applications, and that is achieved with the following code:</p>
 
-<pre><code>config: {
-    ui: 'light',
-    navigationBar: {
-        ui: 'light'
-    },
-    items: [
-        {
-            xtype: 'listcontainer',
-            title: 'CityBars',
-            id: 'listCard'
-        }
-    ]
-}
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;light&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">navigationBar</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;light&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;listcontainer&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;CityBars&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;listCard&#39;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>According to the code above, the theme of the <strong>NavigationView</strong> is <em>light</em>, which means that colors have lighter shades, and also that the navigation bar at the top of the <strong>NavigationView</strong> is colored lightly. The view has one component, a <strong>Container</strong> with a list, and a nickname (xtype) of <em>listcontainer</em>. The title of the <em>listcontainer</em> is ‘CityBars’ and its identification string is <em>listCard</em>. The identification string (id) is added so that the <strong>Controller</strong>, the “mind,” of the application, can refer to it easily. (Although for this application, the controller does not use this information.)</p>
 
 <p>The <em>listcontainer</em> that was first introduced above has to be defined. The code for the component is stored under <strong>app/view/ListContainer.js</strong> and that file contains the following code:</p>
 
-<pre><code>Ext.define('CityBars.view.ListContainer', { extend: 'Ext.Container',
-config: {
-    layout: {
-        type: 'fit'
-    },
-    items: [
-        {
-            xtype: 'list',
-            id: 'dataList',
-            itemTpl: [
-                '&lt;img class="photo" src="{photo_url}" width="40" height="40"/&gt;{name}&lt;br/&gt;&lt;img src="{rating_img_url_small}"/&gt;&amp;nbsp;&lt;small&gt;{address1}&lt;/small&gt;'
-            ]
-        }
-    ]
-}
-}); 
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.view.ListContainer&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.Container&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;fit&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;list&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;dataList&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">itemTpl</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                <span class="s1">&#39;&lt;img class=&quot;photo&quot; src=&quot;{photo_url}&quot; width=&quot;40&quot; height=&quot;40&quot;/&gt;{name}&lt;br/&gt;&lt;img src=&quot;{rating_img_url_small}&quot;/&gt;&amp;nbsp;&lt;small&gt;{address1}&lt;/small&gt;&#39;</span>
+</span><span class='line'>            <span class="p">]</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>The first two lines of the code</p>
 
-<pre><code>Ext.define('CityBars.view.ListContainer', { extend: 'Ext.Container',
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.view.ListContainer&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.Container&#39;</span><span class="p">,</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>specify that the view is part of the CityBars application, that it is called <strong>ListContainer</strong> and that its code is stored under the <strong>view</strong> subdirectory. The <strong>ListContainer</strong> View is a <strong>Container</strong>, a standard component of the Sencha Touch framework. As before, the generic <strong>Container</strong> needs to be configured with the components of our interest, in this case a list. This is achieved with the <em>config</em> statement:</p>
 
-<pre><code>    layout: {
-        type: 'fit'
-    },
-    items: [
-        {
-            xtype: 'list',
-            id: 'dataList',
-            itemTpl: [
-                '&lt;img class="photo" src="{photo_url}" width="40" height="40"/&gt;{name}&lt;br/&gt;&lt;img src="{rating_img_url_small}"/&gt;&amp;nbsp;&lt;small&gt;{address1}&lt;/small&gt;'
-            ]
-        }
-    ]
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'>    <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;fit&#39;</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;list&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;dataList&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">itemTpl</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                <span class="s1">&#39;&lt;img class=&quot;photo&quot; src=&quot;{photo_url}&quot; width=&quot;40&quot; height=&quot;40&quot;/&gt;{name}&lt;br/&gt;&lt;img src=&quot;{rating_img_url_small}&quot;/&gt;&amp;nbsp;&lt;small&gt;{address1}&lt;/small&gt;&#39;</span>
+</span><span class='line'>            <span class="p">]</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>The <em>config</em> statement specifies that layout of the <strong>Container</strong> is <em>fit</em>, which means that every component takes the whole width of the device that the application is running on. The only item in the <strong>ListContainer</strong> is a list, with the standard Sencha-Touch type <strong>list</strong> and the identification string of <em>datalist</em>. Every item in the list is rendered according to the html template shown in <em>itemTpl</em>. According to that template, a 40×40 photo, the name of the bar, its rating and its address are displayed in that order.</p>
 
 <p>When a user taps on one of the items of the list, the application displays additional information about the item tapped. Although, at this point, I have not explained how the program will perform that logic (“if a user taps on an item, show a panel with details about the bar”,) let’s assume that the application does that somehow. (I will explain how this is done in a future post). Once the panel with details appears, a View called <strong>DetailPanel</strong> is displayed. The code for that view is shown below:</p>
 
-<pre><code>Ext.define('CityBars.view.DetailPanel', {
-extend: 'Ext.tab.Panel',
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.view.DetailPanel&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'><span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.tab.Panel&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">tabBar</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">docked</span><span class="o">:</span> <span class="s1">&#39;top&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">pack</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;hbox&#39;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">},</span>
+</span><span class='line'>    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;contact&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Contact&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">iconCls</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                <span class="p">{</span>
+</span><span class='line'>                    <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">padding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;hbox&#39;</span>
+</span><span class='line'>                    <span class="p">},</span>
+</span><span class='line'>                    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                        <span class="p">{</span>
+</span><span class='line'>                            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;component&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">height</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;photo&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">tpl</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                                <span class="s1">&#39;&lt;img class=&quot;photo&quot; src=&quot;{photo_url}&quot; width=&quot;100&quot; height=&quot;100&quot;/&gt;&#39;</span>
+</span><span class='line'>                            <span class="p">],</span>
+</span><span class='line'>                            <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span>
+</span><span class='line'>                        <span class="p">},</span>
+</span><span class='line'>                        <span class="p">{</span>
+</span><span class='line'>                            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;component&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">padding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">tpl</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                                <span class="s1">&#39;&lt;h2&gt;{name}&lt;/h2&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                                <span class="s1">&#39;           &lt;div class=&quot;info&quot;&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                                <span class="s1">&#39;           {address1}&lt;br/&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                                <span class="s1">&#39;           &lt;img src=&quot;{rating_img_url_small}&quot;/&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                                <span class="s1">&#39;           &lt;/div&gt;&#39;</span>
+</span><span class='line'>                            <span class="p">]</span>
+</span><span class='line'>                        <span class="p">}</span>
+</span><span class='line'>                    <span class="p">]</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>                <span class="p">{</span>
+</span><span class='line'>                    <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                        <span class="nx">pack</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+</span><span class='line'>                        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;hbox&#39;</span>
+</span><span class='line'>                    <span class="p">},</span>
+</span><span class='line'>                    <span class="nx">items</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>                        <span class="p">{</span>
+</span><span class='line'>                            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;button&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Call&#39;</span>
+</span><span class='line'>                        <span class="p">},</span>
+</span><span class='line'>                        <span class="p">{</span>
+</span><span class='line'>                            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;spacer&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">width</span><span class="o">:</span> <span class="mi">57</span>
+</span><span class='line'>                        <span class="p">},</span>
+</span><span class='line'>                        <span class="p">{</span>
+</span><span class='line'>                            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;button&#39;</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+</span><span class='line'>                            <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;More&#39;</span>
+</span><span class='line'>                        <span class="p">}</span>
+</span><span class='line'>                    <span class="p">]</span>
+</span><span class='line'>                <span class="p">}</span>
+</span><span class='line'>            <span class="p">]</span>
+</span><span class='line'>        <span class="p">},</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;detailMap&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Map&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">iconCls</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
 
-config: {
-    tabBar: {
-        docked: 'top',
-        ui: 'dark',
-        layout: {
-            pack: 'center',
-            type: 'hbox'
-        }
-    },
-    items: [
-        {
-            xtype: 'container',
-            id: 'contact',
-            title: 'Contact',
-            iconCls: 'info',
-            items: [
-                {
-                    xtype: 'container',
-                    id: 'info',
-                    padding: 10,
-                    layout: {
-                        type: 'hbox'
-                    },
-                    items: [
-                        {
-                            xtype: 'component',
-                            height: 100,
-                            id: 'photo',
-                            tpl: [
-                                '&lt;img class="photo" src="{photo_url}" width="100" height="100"/&gt;'
-                            ],
-                            width: 100
-                        },
-                        {
-                            xtype: 'component',
-                            id: 'data',
-                            padding: 10,
-                            tpl: [
-                                '&lt;h2&gt;{name}&lt;/h2&gt;',
-                                '           &lt;div class="info"&gt;',
-                                '           {address1}&lt;br/&gt;',
-                                '           &lt;img src="{rating_img_url_small}"/&gt;',
-                                '           &lt;/div&gt;'
-                            ]
-                        }
-                    ]
-                },
-                {
-                    xtype: 'container',
-                    layout: {
-                        pack: 'center',
-                        type: 'hbox'
-                    },
-                    items: [
-                        {
-                            xtype: 'button',
-                            width: 100,
-                            text: 'Call'
-                        },
-                        {
-                            xtype: 'spacer',
-                            width: 57
-                        },
-                        {
-                            xtype: 'button',
-                            width: 100,
-                            text: 'More'
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            xtype: 'map',
-            id: 'detailMap',
-            title: 'Map',
-            iconCls: 'info'
-        }
-    ]
-}
-
-});
-</code></pre>
 
 <p>To understand the code shown above, refer to an example detail view, shown on the figures below.</p>
 
@@ -430,86 +688,155 @@ config: {
 
 <p>As a result of this arrangement, a tab panel has to be defined using the following code:</p>
 
-<p> Ext.define(&#8216;CityBars.view.DetailPanel&#8217;, {     extend: &#8216;Ext.tab.Panel&#8217;,</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'> <span class="nx">Ext</span><span class="p">.</span><span class="nx">define</span><span class="p">(</span><span class="s1">&#39;CityBars.view.DetailPanel&#39;</span><span class="p">,</span> <span class="p">{</span>     <span class="nx">extend</span><span class="o">:</span> <span class="s1">&#39;Ext.tab.Panel&#39;</span><span class="p">,</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>which describes, as before, that the code for this panel is stored under <strong>app/view/DetailPanel.js</strong>, and that the panel is a special case of a Sencha-Touch component called <strong>tab.Panel</strong>. The configuration of the tab panel is achieved using the following code:</p>
 
-<pre><code>config: {
-     tabBar: {
-        docked: 'top',
-        ui: 'dark',         
-        layout: {
-            pack: 'center',
-            type: 'hbox'
-            }
-        }, 
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>     <span class="nx">tabBar</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">docked</span><span class="o">:</span> <span class="s1">&#39;top&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">ui</span><span class="o">:</span> <span class="s1">&#39;dark&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">pack</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;hbox&#39;</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>        <span class="p">},</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>According to the code above, the tab bar is docked at the top of the screen, it has a <em>dark</em> theme and lays out its tabs horizontally (hbox) and centered at the center of the tab panel.</p>
 
 <p>The first tab called ‘Contact’ is the most complicated and it is set up in the following code:</p>
 
-<pre><code>xtype: 'container',
-id: 'contact',
-title: 'Contact',
-iconCls: 'info',
-items: [{
-        xtype: 'container',
-        id: 'info',
-        padding: 10,
-            layout: {
-                type: 'hbox'
-                },
-        items: [{
-                xtype: 'component',
-                height: 100,
-                id: 'photo',
-                tpl: ['&lt;img class="photo" src="{photo_url}" width="100" height="100"/&gt;',                     width: 100
-                },
-                {
-                xtype: 'component',
-                id: 'data',
-                padding: 10,
-                tpl: [  '&lt;h2&gt;{name}&lt;/h2&gt;',
-                        '&lt;div class="info"',
-                        '{address1}&lt;br/&gt;',
-                        '&lt;img src="{rating_img_url_small}"/&gt;',
-                        '&lt;/div&gt;'
-                        ]
-                }]},
-            {
-            xtype: 'container',
-            layout: {
-                pack: 'center',
-                type: 'hbox'
-                },
-            items: [{
-                    xtype: 'button',
-                    width: 100,
-                    text: 'Call'
-                },
-                {
-                    xtype: 'spacer',
-                    width: 57
-                },
-                {
-                    xtype: 'button',
-                    width: 100,
-                    text: 'More'
-                }]
-            }
-            ]}, 
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;contact&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Contact&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">iconCls</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">items</span><span class="o">:</span> <span class="p">[{</span>
+</span><span class='line'>        <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">padding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;hbox&#39;</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>        <span class="nx">items</span><span class="o">:</span> <span class="p">[{</span>
+</span><span class='line'>                <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;component&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">height</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;photo&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">tpl</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&lt;img class=&quot;photo&quot; src=&quot;{photo_url}&quot; width=&quot;100&quot; height=&quot;100&quot;/&gt;&#39;</span><span class="p">,</span>                     <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>                <span class="p">{</span>
+</span><span class='line'>                <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;component&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">padding</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">tpl</span><span class="o">:</span> <span class="p">[</span>  <span class="s1">&#39;&lt;h2&gt;{name}&lt;/h2&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                        <span class="s1">&#39;&lt;div class=&quot;info&quot;&#39;</span><span class="p">,</span>
+</span><span class='line'>                        <span class="s1">&#39;{address1}&lt;br/&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                        <span class="s1">&#39;&lt;img src=&quot;{rating_img_url_small}&quot;/&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>                        <span class="s1">&#39;&lt;/div&gt;&#39;</span>
+</span><span class='line'>                        <span class="p">]</span>
+</span><span class='line'>                <span class="p">}]},</span>
+</span><span class='line'>            <span class="p">{</span>
+</span><span class='line'>            <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;container&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="nx">layout</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>                <span class="nx">pack</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+</span><span class='line'>                <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;hbox&#39;</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>            <span class="nx">items</span><span class="o">:</span> <span class="p">[{</span>
+</span><span class='line'>                    <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;button&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Call&#39;</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>                <span class="p">{</span>
+</span><span class='line'>                    <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;spacer&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">width</span><span class="o">:</span> <span class="mi">57</span>
+</span><span class='line'>                <span class="p">},</span>
+</span><span class='line'>                <span class="p">{</span>
+</span><span class='line'>                    <span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;button&#39;</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">width</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+</span><span class='line'>                    <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;More&#39;</span>
+</span><span class='line'>                <span class="p">}]</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="p">]},</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>The first tab is a Sencha-Touch <strong>Container</strong>, with identification <em>contact</em>, title <em>Contact</em>, and has an info icon associated with it (Because this tab panel is docked at the top of the container, the icon is not visible; the icon would be visible if the tab panel were docked at the bottom of the view). This tab contains two <strong>Containers</strong>, as mentioned above. One is the <em>info</em> container that arranges its items horizontally (hbox). The items in it are a 100×100 photo with identification <em>photo</em>, and an html string (with id <em>data</em>) that contains the name, the address and the rating of the bar. The second <strong>Container</strong> centers its three items horizontally; its items are a button with the text <em>Call</em>, a spacer, and a second button with the text <em>More</em>.</p>
 
 <p>The second tab, described with the code below, is a map type with identification <em>detailMap</em>, with title ‘Map’ and an <em>info</em> icon. (As before, because the tab panel is docked at the top of the view, the icon is not visible.). The code below</p>
 
-<pre><code>xtype: 'map',
-id: 'detailMap',
-title: 'Map',
-iconCls: 'info' 
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">xtype</span><span class="o">:</span> <span class="s1">&#39;map&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;detailMap&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Map&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">iconCls</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>describes that when the ‘Map’ tab is tapped, a Google map of the bar is shown.</p>
 
@@ -521,9 +848,9 @@ iconCls: 'info'
   
   <entry>
     <title type="html"><![CDATA[The Structure of a Sencha Touch Application]]></title>
-    <link href="http://www.appsandscience.com/2012/03/the-structure-of-a-sencha-touch-application/"/>
+    <link href="http://www.appsandscience.com/the-structure-of-a-sencha-touch-application/"/>
     <updated>2012-03-05T02:00:00-06:00</updated>
-    <id>http://www.appsandscience.com/2012/03/the-structure-of-a-sencha-touch-application</id>
+    <id>http://www.appsandscience.com/the-structure-of-a-sencha-touch-application</id>
     <content type="html"><![CDATA[<p>In previous posts, I described the <a href="http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/">advantages of using Sencha Touch</a> for developing mobile applications, and I introduced <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">a few terms used in Sencha Touch</a>. In this post I will continue describing Sencha Touch by explaining the code in a simple application that finds the bars near the user. (I first describe CityBars in a <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">previous blog post</a>.</p>
 
 <p>The emphasis of this post will be on describing how code should be organized in Sencha Touch applications, and on analyzing the code of two important files that each Sencha Touch application must have.</p>
@@ -542,49 +869,82 @@ iconCls: 'info'
 
 <p>First, designer.html in its entirety:</p>
 
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
-    &lt;title&gt;City Bars&lt;/title&gt;
-    &lt;link rel="stylesheet" type="text/css" href="http://extjs.cachefly.net/touch/sencha-touch-designer-edition/resources/css/sencha-touch.css"/&gt;
-    &lt;script type="text/javascript" src="http://extjs.cachefly.net/touch/sencha-touch-designer-edition/sencha-touch-all-debug.js"&gt;&lt;/script&gt;
-    &lt;script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"&gt;&lt;/script&gt;
-    &lt;script type="text/javascript" src="designer.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;title&gt;</span>City Bars<span class="nt">&lt;/title&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;http://extjs.cachefly.net/touch/sencha-touch-designer-edition/resources/css/sencha-touch.css&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://extjs.cachefly.net/touch/sencha-touch-designer-edition/sencha-touch-all-debug.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://maps.google.com/maps/api/js?sensor=true&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;designer.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span><span class='line'><span class="nt">&lt;body&gt;&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Within the header of the html document, several of its characteristics are defined. With</p>
 
-<pre><code>&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;
-&lt;title&gt;City Bars&lt;/title&gt;
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;title&gt;</span>City Bars<span class="nt">&lt;/title&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <p>the encoding (UTF-8) and the title of the document are defined.</p>
 
 <p>The following line defines the cascading style sheet that determines the look of the elements such as buttons, tabs, colors etc. of the user interface.</p>
 
-<pre><code>&lt;link rel="stylesheet" type="text/css" href="http://extjs.cachefly.net/touch/sencha-touch-designer-edition/resources/css/sencha-touch.css"/&gt;
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;http://extjs.cachefly.net/touch/sencha-touch-designer-edition/resources/css/sencha-touch.css&quot;</span><span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <p>The style sheet is served on-demand by the CacheFly content delivery network. Such a service is not necessary for an actual mobile application. In such an application the style sheet can be saved locally, and accessed rapidly. The following line includes the link to the source code of Sencha Touch:</p>
 
-<pre><code>&lt;script type="text/javascript" src="http://extjs.cachefly.net/touch/sencha-touch-designer-edition/sencha-touch-all-debug.js"&gt;&lt;/script&gt;
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://extjs.cachefly.net/touch/sencha-touch-designer-edition/sencha-touch-all-debug.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <p>In this case, the debug version of the source code is accessed through an online repository. Although the debug version of the source code is appropriate for development, the production version is used for actual applications.</p>
 
 <p>Because the CityBars application needs to render maps, the Google maps api is loaded with the following code:</p>
 
-<pre><code>&lt;script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"&gt;&lt;/script&gt;
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;http://maps.google.com/maps/api/js?sensor=true&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>Finally, the source code of the application is included with the following line:</p>
 
-<pre><code>&lt;script type="text/javascript" src="designer.js"&gt;&lt;/script&gt;
-</code></pre>
+<p>
+Finally, the source code of the application is included with the following line:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span> <span class="na">src=</span><span class="s">&quot;designer.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <p>Because the source code of the application was generated using Sencha&#8217;s Designer, the JavaScript code is called designer.js.</p>
 
@@ -592,91 +952,158 @@ iconCls: 'info'
 
 <p>The content of designer.js is shown below:</p>
 
-<pre><code>Ext.Loader.setConfig({
-    enabled: true
-});
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">Loader</span><span class="p">.</span><span class="nx">setConfig</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">enabled</span><span class="o">:</span> <span class="kc">true</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">application</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;CityBars&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">models</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="s1">&#39;Business&#39;</span>
+</span><span class='line'>    <span class="p">],</span>
+</span><span class='line'>    <span class="nx">views</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="s1">&#39;MainNav&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;ListContainer&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;DetailPanel&#39;</span>
+</span><span class='line'>    <span class="p">],</span>
+</span><span class='line'>    <span class="nx">controllers</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="s1">&#39;Business&#39;</span>
+</span><span class='line'>    <span class="p">],</span>
+</span><span class='line'>    <span class="nx">stores</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>        <span class="s1">&#39;BusinessStore&#39;</span>
+</span><span class='line'>    <span class="p">],</span>
+</span><span class='line'>    <span class="nx">launch</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">Ext</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;CityBars.view.Viewport&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
 
-Ext.application({
-    name: 'CityBars',
 
-    models: [
-        'Business'
-    ],
-
-    views: [
-        'MainNav',
-        'ListContainer',
-        'DetailPanel'
-    ],
-
-    controllers: [
-        'Business'
-    ],
-
-    stores: [
-        'BusinessStore'
-    ],
-
-    launch: function() {
-        Ext.create('CityBars.view.Viewport');
-    }
-});
-</code></pre>
+<p></p>
 
 <p>The line</p>
 
-<pre><code>Ext.Loader.setConfig({
-    enabled: true
-});
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">Loader</span><span class="p">.</span><span class="nx">setConfig</span><span class="p">({</span>
+</span><span class='line'>    <span class="nx">enabled</span><span class="o">:</span> <span class="kc">true</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <p>instructs the application to load the necessary Sencha Touch classes on demand. This allows the optimization of the initial load time of the application and loading the modules only when the user requests. In the</p>
 
-<pre><code>Ext.application({
-})
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">Ext</span><span class="p">.</span><span class="nx">application</span><span class="p">({</span>
+</span><span class='line'><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <p>section, several characteristics of the application are defined. First, the name of the application is given.</p>
 
-<pre><code>name: 'CityBars',
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;CityBars&#39;</span><span class="p">,</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <p>The model of the application, <em>Business.js</em> is referenced next. <em>Business.js</em> contains the names and types of the fields that are served by Yelp.</p>
 
-<pre><code>models: [
-    'Business'
-],
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">models</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="s1">&#39;Business&#39;</span>
+</span><span class='line'><span class="p">],</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <p>As I described in a previous <a href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/">blog post</a>, the application has three views: the MainNav view that provides a navigation bar, the ListContainer with the list of Bars, and the DetailPanel with information about each bar. These views are referenced in the following:</p>
 
-<pre><code>views: [
-    'MainNav',
-    'ListContainer',
-    'DetailPanel'
-],
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">views</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="s1">&#39;MainNav&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;ListContainer&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;DetailPanel&#39;</span>
+</span><span class='line'><span class="p">],</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <p>The application has a single controller that finds the user location, finds nearby Bars, and responds to the user tapping of an item in the ListContainer. The controller is referenced as follows:</p>
 
-<pre><code>controllers: [
-    'Business'
-],
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">controllers</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="s1">&#39;Business&#39;</span>
+</span><span class='line'><span class="p">],</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <p>Also, the data for the application are going to be served in <a href="https://en.wikipedia.org/wiki/JSONP">JSONP</a> format from Yelp, and that information needs to be stored in the <em>BusinessStore.js</em>, which in turn needs to be referenced in the application:</p>
 
-<pre><code>stores: [
-    'BusinessStore'
-],
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">stores</span><span class="o">:</span> <span class="p">[</span>
+</span><span class='line'>    <span class="s1">&#39;BusinessStore&#39;</span>
+</span><span class='line'><span class="p">],</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <p>Finally, when the application starts, the <em>Viewport.js</em> view is loaded. This behavior is described below:</p>
 
-<pre><code>launch: function() {
-    Ext.create('CityBars.view.Viewport');
-}
-</code></pre>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='js'><span class='line'><span class="nx">launch</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">Ext</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="s1">&#39;CityBars.view.Viewport&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
 
 <p>The Viewport of this application loads the MainNav.</p>
 
@@ -688,9 +1115,9 @@ Ext.application({
   
   <entry>
     <title type="html"><![CDATA[Making Sense of Sencha Touch: The CityBars App - Views]]></title>
-    <link href="http://www.appsandscience.com/2012/02/making-sense-of-sencha-touch-the-citybars-app-views/"/>
+    <link href="http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views/"/>
     <updated>2012-02-20T02:00:00-06:00</updated>
-    <id>http://www.appsandscience.com/2012/02/making-sense-of-sencha-touch-the-citybars-app-views</id>
+    <id>http://www.appsandscience.com/making-sense-of-sencha-touch-the-citybars-app-views</id>
     <content type="html"><![CDATA[<p>In a previous <a href="http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/">post</a>, I described the advantages of using Sencha Touch to develop applications for mobile platforms. In this post I would like to describe a few Sencha Touch concepts.</p>
 
 <p>If you would like to see how a Sencha Touch application works, check out the <a href="http://dev.sencha.com/deploy/touch/examples/kitchensink/">kitchensink</a> application that has been created by the developers of Sencha Touch. You will be able to preview the JavaScript code that generates these views and you will be surprised by the relative short length of the code, at least compared to that necessary in Objective-C.</p>
@@ -700,18 +1127,43 @@ Ext.application({
 <p>This will be the first in a series of blog posts that aim to describe how to develop, build and deploy a mobile application using Touch 2. After you read this and the upcoming posts you will be able to</p>
 
 <ul>
-<li><p>understand several concepts of Sencha Touch,</p></li>
-<li><p>follow along with <a href="http://vimeo.com/36420727">this</a></p></li>
+<li>understand several concepts of Sencha Touch,</li>
+<li>follow along with <a href="http://vimeo.com/36420727">this</a> and other screencasts created by Sencha</li>
+<li>use Sencha&#8217;s Designer to create the application from scratch.</li>
 </ul>
 
+
+<p>For all the posts I will use the CityBars application that is explained in this screencast and its source code is available here.</p>
+
+<p>CityBars finds the location of the user and lists nearby bars. The application provides that same results that you would obtain using Yelp&#8217;s mobile application because the information about each bar is pulled from Yelp. In this post I will describe the components of the graphical user interface of CityBars. In future posts, I will write about the way that CityBars is pulling data from the Internet, how it finds the location of the user and how it responds to user taps.</p>
+
+<p>The application contains two types of screens. One that shows the list of the bars and one that shows details about the bar. This is a Master-Detail type of application.</p>
+
+<p>Figure 1
+Figure 2
+Figure 3</p>
+
+<p>Common to both screens of the CityBars application is a navigation bar docked on the top of the screen. In Sencha Touch 2 terminology the navigation bar is an example of a <strong>NavigationView</strong> component. (Important: All Sencha Touch 2 terms will be written in bold from now on.) When an item below the navigation bar is tapped the navigation bar changes its title to match that of the tapped item and a Back button appears.</p>
+
+<p>Below the navigation bar there are two screens or <strong>Views</strong>. The first one shows a list a Dataview.List of the bars in the area (Figure 1). The second view is more complicated because it contains a tab panel (tabPanel) with two tabs: The first tab panel (Figure 2) consists of two Container components. The first Container shows an image of the bar its name its address and its rating. The second Container is stacked below the first and contains two buttons: one that can be used to call the bar and one to that can be tapped to get more information about the bar. Both buttons are inactive in this version of the application.</p>
+
+<p>The second panel (Figure 3) consists of a <strong>Map</strong> component that displays the location of the bar on a Google map. Unfortunately, there is no simple correspondence between what a user would call a screen and what Sencha Touch calls a <strong>View</strong>. According to Sencha Touch, the first screen the list of bars contains two components: The <strong>NavigationView</strong> and below it a <strong>Container</strong> that displays the <strong>DataView.List</strong> or simply the list. Similarly the second screen contains a tabPanel with a tabBar on the top and two different tabs each of which contains one or more Container components.</p>
+
+<p>I will now describe each screen of CityBars using Sencha Touch terminology. The descriptions below will be useful in a future post when I look at the application code.</p>
+
+<p>The <strong>NavigationView</strong> component has a <strong>light</strong> theme as opposed to the <strong>default</strong> dark theme. There is a single item contained in the <strong>NavigationView</strong> with the title CityBars and that item is a <strong>List Container</strong>. The list Container is set to fit the entire space available to it with the following item: A 40x40 pixel image of the bar and next to it its name, its rating and its address. When a user taps on an item, the app displays a <strong>tab.Panel</strong> which is docked to the top of the screen. The <strong>tab.Panel</strong> looks darker than the navigation bar and its tabs are arranged horizontally and centered across the bar. By default the application displays the Contact tab which consists of the Contact <strong>Container</strong> (Figure 2). The <strong>Container</strong> in turn, contains several <strong>Container</strong> components itself.</p>
+
+<p>The first <strong>Container</strong> contains two <strong>Components</strong>: One that shows a 100x100 pixel photo of the bar and a second that shows the bar name address and rating. The second <strong>Container</strong> <strong>packs</strong> in the center and <strong>stacks</strong> horizontally a Call <strong>Button</strong> a <strong>Spacer</strong> and a More <strong>Button</strong>. When the tab called Map is tapped the app shows the <strong>Map Container</strong> (Figure 3). The <strong>Container</strong> is titled Map and contains a single <strong>Map Component</strong>.</p>
+
+<p>Next time I will provide the code of the application views and explain it line-by-line.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Creating an iPhone application with JavaScript: The Sencha Touch solution]]></title>
-    <link href="http://www.appsandscience.com/2012/02/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/"/>
+    <link href="http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution/"/>
     <updated>2012-02-13T02:00:00-06:00</updated>
-    <id>http://www.appsandscience.com/2012/02/creating-an-iphone-application-with-javascript-the-sencha-touch-solution</id>
+    <id>http://www.appsandscience.com/creating-an-iphone-application-with-javascript-the-sencha-touch-solution</id>
     <content type="html"><![CDATA[<p><img class="left" src="http://appsandscience.com/images/sencha.png" width="200" height="250" title="Sencha Touch logo" alt="Sencha Touch logo"></p>
 
 <p>During the past few months, I spent countless hours studying Objective-C, the language used for iPhone and iPad app development. Just to give you an idea, the books and tutorials I have studied from include</p>
@@ -758,9 +1210,9 @@ Ext.application({
   
   <entry>
     <title type="html"><![CDATA[Creating an iPhone application without coding: The Tiggzi solution]]></title>
-    <link href="http://www.appsandscience.com/2012/02/creating-an-iphone-application-without-coding-the-tiggzi-solution/"/>
+    <link href="http://www.appsandscience.com/creating-an-iphone-application-without-coding-the-tiggzi-solution/"/>
     <updated>2012-02-06T02:00:00-06:00</updated>
-    <id>http://www.appsandscience.com/2012/02/creating-an-iphone-application-without-coding-the-tiggzi-solution</id>
+    <id>http://www.appsandscience.com/creating-an-iphone-application-without-coding-the-tiggzi-solution</id>
     <content type="html"><![CDATA[<p>For the past few weeks I have been experimenting with various tools that one can use to develop an iPhone/iPad application, without the need to program in Objective-C. In a previous blog post <a href="http://www.appsandscience.com/getting-started-on-app-development-with-a-little-help-from-canappi/">I described Canappi</a>, a tool that uses a specialized language, MDSL, to generate Objective-C code. In this post, I will describe <a href="http://www.tiggzi.com">Tiggzi</a>, a web service that creates native code for iPhone and Android applications using a coding-free graphical user interface. I will first describe the advantages and disadvantages of Tiggzi, and I will then share with you my recommendation about the service.</p>
 
 <h3>Advantages</h3>
@@ -794,9 +1246,9 @@ Ext.application({
   
   <entry>
     <title type="html"><![CDATA[Getting Started on App Development with a Little Help from Canappi]]></title>
-    <link href="http://www.appsandscience.com/2012/01/getting-started-on-app-development-with-a-little-help-from-canappi/"/>
+    <link href="http://www.appsandscience.com/getting-started-on-app-development-with-a-little-help-from-canappi/"/>
     <updated>2012-01-23T02:00:00-06:00</updated>
-    <id>http://www.appsandscience.com/2012/01/getting-started-on-app-development-with-a-little-help-from-canappi</id>
+    <id>http://www.appsandscience.com/getting-started-on-app-development-with-a-little-help-from-canappi</id>
     <content type="html"><![CDATA[<p>Developing simple data-driven apps for the iPhone is not simple. Objective-C, the native language of the iPhone, is very difficult, and accomplishing simple tasks can be quite complicated.</p>
 
 <p>I realized that when I tried to created a simple menu driven application that catalogs all the Chemistry apps on the Apple store. Just a bit of background: Depending on how you choose to classify the available Chemistry apps, they belong to the following categories:</p>
@@ -946,9 +1398,9 @@ view featuredView 'Featured' {
   
   <entry>
     <title type="html"><![CDATA[Five Reasons Why You See More and More People with iPhones]]></title>
-    <link href="http://www.appsandscience.com/2012/01/five-reasons-why-you-see-more-and-more-people-with-iphones/"/>
+    <link href="http://www.appsandscience.com/five-reasons-why-you-see-more-and-more-people-with-iphones/"/>
     <updated>2012-01-16T09:58:00-06:00</updated>
-    <id>http://www.appsandscience.com/2012/01/five-reasons-why-you-see-more-and-more-people-with-iphones</id>
+    <id>http://www.appsandscience.com/five-reasons-why-you-see-more-and-more-people-with-iphones</id>
     <content type="html"><![CDATA[<p>Do you see more and more people carrying iPhones these days? I certainly do: Everywhere I look, I see iPhones, new and old. So what do you think?</p>
 
 <p><strong>Are there more and more people using iPhones these days?</strong></p>
@@ -986,9 +1438,9 @@ view featuredView 'Featured' {
   
   <entry>
     <title type="html"><![CDATA[Getting started with developing iOS apps: Hardware]]></title>
-    <link href="http://www.appsandscience.com/2012/01/getting-started-with-developing-ios-apps-hardware/"/>
+    <link href="http://www.appsandscience.com/getting-started-with-developing-ios-apps-hardware/"/>
     <updated>2012-01-07T16:26:00-06:00</updated>
-    <id>http://www.appsandscience.com/2012/01/getting-started-with-developing-ios-apps-hardware</id>
+    <id>http://www.appsandscience.com/getting-started-with-developing-ios-apps-hardware</id>
     <content type="html"><![CDATA[<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/01/iphone.jpg"><img src="http://www.appsandscience.com/wp-content/uploads/2012/01/iphone-300x225.jpg" alt="caption id=&quot;attachment_23&quot; align=&quot;alignleft&quot; width=&quot;180&quot; caption=&quot;Image: Salvatore Vuono / FreeDigitalPhotos.net&quot;" /></a>[/caption]</p>
 
 <p>The first question that I had when I started with iPhone/iPad app development was what hardware was necessary for the job. Could I develop my apps on Windows or, even better, could I do it using my Linux machine? And would I need to buy an iPad in addition to the iPhone that I already owned?</p>
@@ -1052,9 +1504,9 @@ view featuredView 'Featured' {
   
   <entry>
     <title type="html"><![CDATA[Welcome to the Apps and Science Blog!]]></title>
-    <link href="http://www.appsandscience.com/2012/01/welcome-to-apps-and-science-blog/"/>
+    <link href="http://www.appsandscience.com/welcome-to-apps-and-science-blog/"/>
     <updated>2012-01-07T02:00:00-06:00</updated>
-    <id>http://www.appsandscience.com/2012/01/welcome-to-apps-and-science-blog</id>
+    <id>http://www.appsandscience.com/welcome-to-apps-and-science-blog</id>
     <content type="html"><![CDATA[<p>Welcome to the Apps and Science blog! <strong>This blog will document my progress towards learning how to create a science app</strong> for the iPhone and the iPad.</p>
 
 <p><strong>I am a chemist with some knowledge of programming</strong> but with a great interest in creating science apps. Thinking that &#8220;it can&#8217;t be that hard to create an app,&#8221; I got started reading about app development in December, 2011. <strong>I hope to develop my own science app by June, 2012</strong>.</p>
