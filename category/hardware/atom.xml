@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Hardware | Apps and Science]]></title>
   <link href="http://www.appsandscience.com/category/hardware/atom.xml" rel="self"/>
   <link href="http://www.appsandscience.com/"/>
-  <updated>2012-07-14T13:46:35-05:00</updated>
+  <updated>2012-07-14T14:13:57-05:00</updated>
   <id>http://www.appsandscience.com/</id>
   <author>
     <name><![CDATA[Nikos Bentenitis]]></name>
@@ -18,13 +18,11 @@
     <link href="http://www.appsandscience.com/2012/01/getting-started-with-developing-ios-apps-hardware/"/>
     <updated>2012-01-07T16:26:00-06:00</updated>
     <id>http://www.appsandscience.com/2012/01/getting-started-with-developing-ios-apps-hardware</id>
-    <content type="html"><![CDATA[<p><a href="http://www.appsandscience.com/wp-content/uploads/2012/01/iphone.jpg"><img src="http://www.appsandscience.com/wp-content/uploads/2012/01/iphone-300x225.jpg" alt="caption id=&quot;attachment_23&quot; align=&quot;alignleft&quot; width=&quot;180&quot; caption=&quot;Image: Salvatore Vuono / FreeDigitalPhotos.net&quot;" /></a>[/caption]</p>
+    <content type="html"><![CDATA[<p><img class="left" src="/images/appsandscience.png" width="100" height="100" title="AppsAndScience.com logo" alt="AppsAndScience.com logo"></p>
 
 <p>The first question that I had when I started with iPhone/iPad app development was what hardware was necessary for the job. Could I develop my apps on Windows or, even better, could I do it using my Linux machine? And would I need to buy an iPad in addition to the iPhone that I already owned?</p>
 
 <p>After I did a lot of of research these are the answers that I found:</p>
-
-<h3></h3>
 
 <h3>You need an Intel-based Mac. The alternatives are for the adventurous</h3>
 
